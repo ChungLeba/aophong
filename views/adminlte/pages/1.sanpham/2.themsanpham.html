@@ -31,7 +31,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="adminlte/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="../../adminlte/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -80,7 +80,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="adminlte/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="../../adminlte/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -96,7 +96,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="adminlte/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="../../adminlte/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -112,7 +112,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="adminlte/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="../../adminlte/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -283,15 +283,29 @@
               <label for="inputClientCompany">Chọn Size</label>
               <input type="text" id="size" class="form-control">
             </div>
+            <!-- <div class="form-group">
+              <label>Chọn Size</label>
+              <select id="size" multiple="" class="form-control">
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+              </select>
+            </div> -->
             <div class="form-group">
               <label for="inputProjectLeader">Màu sắc</label>
               <input type="text" id="mausac" class="form-control">
             </div>
             <div class="form-group">
               <label for="inputProjectLeader">Đơn giá</label>
-              <input type="text" id="dongia" class="form-control">
+              <input type="number" id="dongia" class="form-control">
             </div>
           </div>
+        </div>
+        <div class="col-sm-3">
+          <button id="luu" type="button" class="btn btn-block btn-success btn-lg">Lưu dữ liệu</button> 
+          <br>
         </div>
       </div><!-- /.container-fluid -->
     </div>
@@ -347,6 +361,45 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<script>
+  $(document).ready(function(){
+    
+    $("#luu").click(function(){
+      var ten = $("#ten").val();
+      var mota = $("#mota").val();
+      var thuonghieu = $("#thuonghieu").val();
+      var size = $("#size").val();
+      var mausac = $("#mausac").val();
+      var dongia = $("#dongia").val();
+      //console.log(ten, mota, thuonghieu, size, mausac, dongia)
+      if(ten==''){
+        alert("Tên sản phẩm không được trống")
+      } else {
+        $.ajax({
+            url:'/admin/themsanpham',
+            type:'POST',
+            dataType: 'json',
+            data: {
+                    ten: ten,
+                    mota: mota,
+                    thuonghieu: thuonghieu,
+                    size: size,
+                    mausac: mausac,
+                    gia: dongia
+                },
+            success: function(res){
+                console.log(res)
+                alert("Áo thun: "+res.name+" Đã được thêm")
+                //location.reload()
+            }
+      })
+      }
+      
+    })
+
+  })
+
+</script>
 <!-- Bootstrap 4 -->
 <script src="../../adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -370,7 +423,7 @@
 <!-- AdminLTE App -->
 <script src="../../adminlte/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src=".../../adminlte/dist/js/demo.js"></script>
+<script src="../../adminlte/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../adminlte/dist/js/pages/dashboard.js"></script>
 </body>

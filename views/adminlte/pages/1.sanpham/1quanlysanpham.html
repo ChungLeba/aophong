@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Dashboard</title>
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -31,7 +30,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="adminlte/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="../../adminlte/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -268,7 +267,7 @@
             </a>
             <br>
           </div>
-          
+          <!-- DANH SACH ÁO -->
           <div class="col-12">
             <div class="card">
               <div class="card-header">
@@ -279,32 +278,43 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>TT</th>
                     <th>Tên áo thun</th>
+                    <th>Đơn giá (vnđ)</th>
                     <th>Mô tả</th>
                     <th>Thương hiệu</th>
                     <th>Size</th>
                     <th>Màu sắc</th>
-                    <th>Đơn giá</th>
+                    <th>Sửa</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                    <td>X</td>
-                  </tr>
+                    <% for( let index = 0; index < data.length; index++ ) { %>
+                      <tr>
+                        <td><%-index + 1%></td>
+                        <td><%-data[index].ten%></td>
+                        <td><%-data[index].gia%></td>
+                        <td><%-data[index].mota%></td>
+                        <td><%-data[index].thuonghieu%></td>
+                        <td><%-data[index].size%></td>
+                        <td><%-data[index].mausac%></td>
+                        <td>
+                          <button id="bt_sua<%-index%>" type="button" class="btn btn-primary">
+                          Sửa
+                          </button>
+                          <button id="bt_xoa<%-index%>" type="button" class="btn btn-danger">
+                          Xóa
+                          </button>
+                        </td>
+                      </tr>
+                    <% } %>
+                  
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
           </div>
-
         </div>
       </div><!-- /.container-fluid -->
     </div>

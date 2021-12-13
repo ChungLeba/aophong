@@ -9,6 +9,16 @@ var customerRouter = require('./routers/customer.js');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+// Render HTML
+app.engine('html', require('ejs').renderFile)
+
+//TEST RENDER
+app.get('/test', (req, res) => {
+  res.render('index')
+})
 
 //REDERECT TO CUSOMER HOME
 app.get('/', (req, res) => {
