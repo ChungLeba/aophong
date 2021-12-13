@@ -27,13 +27,13 @@ router.get('/themsanpham', function(req,res,next){
 //3.DON DAT HANG
 router.get('/quanlydonhang', function(req,res,next){
     //res.send("Trang tổng quan")
-    res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
+    res.sendFile(path.join(__dirname, '../views/adminlte/pages/1.sanpham/3.quanlydonhang.html'))
 })
 
 //4.NGUOI DUNG
 router.get('/quanlynguoidung', function(req,res,next){
     //res.send("Trang tổng quan")
-    res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
+    res.sendFile(path.join(__dirname, '../views/adminlte/pages/1.sanpham/4.quanlynguoidung.html'))
 })
 
 module.exports = router;
