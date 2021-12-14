@@ -275,7 +275,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="tableao" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>TT</th>
@@ -292,19 +292,18 @@
                     <% for( let index = 0; index < data.length; index++ ) { %>
                       <tr>
                         <td><%-index + 1%></td>
-                        <td><%-data[index].ten%></td>
+                        <td><a href="/admin/sp/<%-data[index]._id%>"><%-data[index].ten%></a></td>
                         <td><%-data[index].gia%></td>
                         <td><%-data[index].mota%></td>
                         <td><%-data[index].thuonghieu%></td>
                         <td><%-data[index].size%></td>
                         <td><%-data[index].mausac%></td>
                         <td>
-                          <button id="bt_sua<%-index%>" type="button" class="btn btn-primary">
-                          Sửa
-                          </button>
-                          <button id="bt_xoa<%-index%>" type="button" class="btn btn-danger">
-                          Xóa
-                          </button>
+                          <a href="/admin/sp/edit/<%-data[index]._id%>">
+                            <button id="bt_sua<%-index%>" type="button" class="btn btn-primary">
+                              Sửa
+                            </button>
+                          </a>
                         </td>
                       </tr>
                     <% } %>

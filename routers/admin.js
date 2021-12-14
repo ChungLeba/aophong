@@ -28,13 +28,24 @@ router.get('/quanlysanpham', function(req,res,next){
     
 })
 
-//2.2 THEM SAN PHAM
+//2.2 XEM CHI TIẾT SẢN PHẨM
+router.get('/sp/:id', function(req,res,next){
+    console.log(req.params.id)
+    aothunModel.findById({_id: req.params.id})
+    .then(data=>{
+        console.log(data)
+        res.render("./adminlte/pages/1.sanpham/5.xemsanpham.html", {data:data})
+    })
+    
+})
+
+
+//2.3 THEM SAN PHAM
 router.get('/themsanpham', function(req,res,next){
     //res.send("Trang tổng quan san pham")
     //res.sendFile(path.join(__dirname, '../views/adminlte/pages/1.sanpham/2.themsanpham.html'))
     res.render("./adminlte/pages/1.sanpham/2.themsanpham.html")
 })
-
 router.post('/themsanpham',urlencodedParser, function(req,res,next){
     console.log(req.body)
     aothunModel.create(
@@ -50,6 +61,51 @@ router.post('/themsanpham',urlencodedParser, function(req,res,next){
     .then(data=>{
         console.log(data)
         res.send({name: data.ten})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+//2.4 SUA SAN PHAM
+router.get('/sp/edit/:id', function(req,res,next){
+    console.log(req.params.id)
+    aothunModel.findById({_id: req.params.id})
+    .then(data=>{
+        console.log(data)
+        res.render("./adminlte/pages/1.sanpham/6.suasanpham.html",{data:data})
+    })
+})
+router.put('/sp/:id',urlencodedParser, function(req,res,next){
+    //console.log(req.params.id)
+    //console.log(req.body)
+    aothunModel.findByIdAndUpdate({_id:req.params.id},
+        {
+        ten: req.body.ten,
+        mota: req.body.mota,
+        thuonghieu: req.body.thuonghieu,
+        size: req.body.size,
+        mausac: req.body.mausac,
+        gia: req.body.gia,
+        }
+    )
+    .then(data=>{
+        //console.log(data)
+        res.send({name: data.ten})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+
+//2.5 XOA SAN PHAM
+router.delete('/sp/:id',urlencodedParser, function(req,res,next){
+    //console.log(req.params.id)
+    console.log(req.body)
+    aothunModel.findByIdAndDelete({_id:req.body.id}
+    )
+    .then(data=>{
+        console.log(data)
+        res.send({name: "Đã xóa"})
     })
     .catch(err=>{
         console.log(err)
