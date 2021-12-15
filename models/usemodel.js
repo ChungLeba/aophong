@@ -1,32 +1,61 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://nodemy:nodemyabc@cluster0.oihzb.mongodb.net/aophongstore?retryWrites=true&w=majority');
+const mongoose = require('./dbConnect');
+const donhangModel = require('./donhangmodel')
+const giohangModel = require('./giohangmodel')
+const bcrypt = require('bcrypt')
 
 // Model
-var useSchema = new mongoose.Schema({
+var useSchema = mongoose.Schema({
     phanquyen: Number, //1: admin, 2: nhanvien, 3: khach hang
     email: String,
     matkhau: String,
     hoten: String,
     sodienthoai: String,
     diachi: String,
+    tokens: [{
+        token: String
+    }],
     },{collection : 'uses'})
-    
-var useModel = mongoose.model('useModel',useSchema)
 
-//CREATE DATA
-useModel.create({
-    phanquyen: 3,
-    email: 'khachhang1@gmail.com',
-    matkhau: '123456',
-    hoten: "ANH HAI LUA",
-    sodienthoai: "0989 527 911",
-    diachi: "77 Le Van Thinh, Hoa Minh, Lien Chieu, Da Nang",
+// định nghĩa lại định dạng user trả về ở response, không nên để password
+useSchema.methods.toJSON = function(){
+    const user = this
+    const userObject = user.toObject()
+    delete userObject.password
+    return userObject
+}
+useSchema.statics.findByCredentials = async function(email, password) {
+    const user = await this.findOne({ email })
+    if(!user) {
+        throw new Error('Unable to login')
+    }
+    const isMatch = await bcrypt.compare(password, user.password)
+    if(!isMatch) {
+        throw new Error('Unable to login')
+    }
+    return user
+    
+}
+useSchema.methods.generateAuthToken = async function() {
+    const user = this
+    const token = await jwt.sign({ _id: user._id.toString() }, 'pass')
+    user.tokens = user.tokens.concat({ token })
+    await user.save()
+    return token
+}
+useSchema.methods.generateCart = async function() {
+    const user = this
+    const cart = await giohangModel.create({ userID: user._id })
+    return cart
+}
+
+useSchema.pre('save', async function(next) {
+    const user = this
+//đk trả về true khi tài khoản lập mới hoặc đổi req.body có field là "password" mà k cần khác mật khẩu cũ
+    if(user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+    next()
 })
-.then(data=>{
-    console.log(data)
-})
-.catch(err=>{
-    console.log(err)
-})
+var useModel = mongoose.model('useModel',useSchema)
 
 module.exports = useModel;

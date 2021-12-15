@@ -5,9 +5,15 @@ const port = 3000
 //import router
 var adminRouter = require('./routers/admin');
 var customerRouter = require('./routers/customer.js');
+var indexRouter = require('./routers/index.js');
+const cartRouter = require('./routers/cart')
+const orderRouter = require('./routers/order')
 //STATIC FOLDER
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
+
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +36,11 @@ app.use('/admin', adminRouter)
 
 //CUSTOMER ROUTER
 app.use('/c', customerRouter)
+
+app.use('/', indexRouter)
+app.use('/cart', cartRouter)
+app.use('/order', orderRouter)
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

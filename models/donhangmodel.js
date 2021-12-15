@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://nodemy:nodemyabc@cluster0.oihzb.mongodb.net/aophongstore?retryWrites=true&w=majority');
+const mongoose = require('./dbConnect');
 
 // Model
-var donhangSchema = new mongoose.Schema({
+var donhangSchema = mongoose.Schema({
     donhang: [{
         aothunID: String, 
         soluong: Number,
@@ -13,8 +12,9 @@ var donhangSchema = new mongoose.Schema({
     diachinhanhang: String,
     cachthanhtoan: String,
     trangthaidonhang: String
-    },{collection : 'donhangs'})
-    
+    },{timestamps: true, collection : 'donhangs'})
+
+
 var donhangModel = mongoose.model('donhangModel',donhangSchema)
 
 //CREATE DATA

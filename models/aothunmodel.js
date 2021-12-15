@@ -1,9 +1,7 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://nodemy:nodemyabc@cluster0.oihzb.mongodb.net/aophongstore?retryWrites=true&w=majority');
-
+const mongoose = require('./dbConnect');
 
 // Model
-var aothunSchema = new mongoose.Schema({
+var aothunSchema = mongoose.Schema({
     ten: String,
     mota: String,
     thuonghieu: String,
