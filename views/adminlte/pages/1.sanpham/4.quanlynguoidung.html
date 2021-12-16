@@ -289,9 +289,10 @@
                   <tr>
                     <th>TT</th>
                     <th>Username</th>
+                    <th>Quyền</th>
                     <th>Họ và Tên</th>
                     <th>Điện thoại</th>
-                    <th>Quyền</th>
+                    <th>Địa ch</th>
                     <th>Sửa</th>
                   </tr>
                   </thead>
@@ -300,9 +301,10 @@
                       <tr>
                         <td>1</td>
                         <td><%- data[index].email %></td>
+                        <td><%- data[index].phanquyen %></td>
                         <td><%- data[index].hoten %></td>
                         <td><%- data[index].sodienthoai %></td>
-                        <td><%- data[index].phanquyen %></td>
+                        <td><%- data[index].diachi %></td>
                         <td>
                           <a href="/admin/themnguoidung/<%- data[index]._id %>">
                               <button id="bt_sua<%- index +1 %>" type="button" class="btn btn-primary">

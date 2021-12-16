@@ -11,11 +11,34 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
 //LOGIN
+//GET
 router.get('/', function(req,res,next){
     //res.send("Trang tổng quan")
     //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
-    res.render("./adminlte/pages/3.use/2.login.html",{admin:"Administrator"})
+    res.render("./adminlte/pages/3.use/2.login.html",{mes:""})
 })
+//POST CHECK ACC
+router.post('/',urlencodedParser, function(req,res,next){
+    //console.log(req.body)
+    useModel.findOne({
+        email: req.body.email,
+        matkhau: req.body.pass
+    })
+    .then(data=>{
+        //console.log(data)
+        if(data){
+            res.redirect("/admin/quanly")
+            
+        } else {
+            res.render("./adminlte/pages/3.use/2.login.html",{mes:"Vui lòng kiểm tra lại tài khoản và mật khẩu !!!"})
+            //res.send({mes:"Vui lòng kiểm tra lại tài khoản và mật khẩu"})
+        }
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+
 
 //CRDU
 //1.TRUNG TAM QUAN LY
@@ -135,7 +158,7 @@ router.get('/quanlydonhang', function(req,res,next){
 router.get('/quanlynguoidung', function(req,res,next){
     useModel.find()
     .then(data=>{
-        console.log(data)
+        //console.log(data)
         res.render("./adminlte/pages/1.sanpham/4.quanlynguoidung.html",{data:data})
 
     })
