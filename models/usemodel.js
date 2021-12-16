@@ -14,7 +14,7 @@ var useSchema = new mongoose.Schema({
 var useModel = mongoose.model('useModel',useSchema)
 
 //CREATE DATA
-useModel.create({
+/* useModel.create({
     phanquyen: 3,
     email: 'khachhang1@gmail.com',
     matkhau: '123456',
@@ -28,5 +28,6 @@ useModel.create({
 .catch(err=>{
     console.log(err)
 })
+ */
 
 module.exports = useModel;

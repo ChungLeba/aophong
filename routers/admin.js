@@ -2,14 +2,24 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var aothunModel = require('../models/aothunmodel')
+var useModel = require('../models/usemodel')
 //BODYPASER
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+
+
+//LOGIN
+router.get('/', function(req,res,next){
+    //res.send("Trang tổng quan")
+    //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
+    res.render("./adminlte/pages/3.use/2.login.html",{admin:"Administrator"})
+})
+
 //CRDU
 //1.TRUNG TAM QUAN LY
-router.get('/', function(req,res,next){
+router.get('/quanly', function(req,res,next){
     //res.send("Trang tổng quan")
     //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
     res.render("./adminlte/index.html",{admin:"Administrator"})
@@ -123,10 +133,51 @@ router.get('/quanlydonhang', function(req,res,next){
 
 //4.NGUOI DUNG
 router.get('/quanlynguoidung', function(req,res,next){
-    //res.send("Trang tổng quan")
-    //res.sendFile(path.join(__dirname, '../views/adminlte/pages/1.sanpham/4.quanlynguoidung.html'))
-    res.render("./adminlte/pages/1.sanpham/4.quanlynguoidung.html")
+    useModel.find()
+    .then(data=>{
+        console.log(data)
+        res.render("./adminlte/pages/1.sanpham/4.quanlynguoidung.html",{data:data})
 
+    })
 })
+//4.1.THEM NGUOI DUNG
+router.get('/themnguoidung', function(req,res,next){
+    res.render("./adminlte/pages/1.sanpham/3.1.themnguoidung.html")
+})
+router.post('/themnguoidung',urlencodedParser, function(req,res,next){
+    //console.log(req.body)
+    useModel.findOne({
+        email: req.body.email
+    })
+    .then(data=>{
+        //console.log(data)
+        if(data){
+            res.send({err: "Email đã tồn tại"})
+        } else {
+            useModel.create(
+                {
+                    phanquyen: req.body.phanquyen,
+                    email: req.body.email,
+                    matkhau: req.body.matkhau,
+                    hoten: req.body.hoten,
+                    sodienthoai: req.body.sodienthoai,
+                    diachi: req.body.diachi
+                }
+            )
+            .then(data=>{
+                //console.log(data)
+                res.send({name: data.email})
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+
+
 
 module.exports = router;
