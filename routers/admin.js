@@ -177,7 +177,49 @@ router.post('/themnguoidung',urlencodedParser, function(req,res,next){
         console.log(err)
     })
 })
+//4.2.UPDATE NGUOI DUNG
+router.get('/themnguoidung/:id',urlencodedParser, function(req,res,next){
+    useModel.findById({
+        _id: req.params.id
+    })
+    .then(data=>{
+        res.render("./adminlte/pages/1.sanpham/3.2.suanguoidung.html",{data:data})
+    })
+    
+})
 
+router.put('/themnguoidung/:id',urlencodedParser, function(req,res,next){
+    console.log(req.body)
+    useModel.findByIdAndUpdate({_id:req.params.id},
+        {
+            phanquyen: req.body.phanquyen,
+            email: req.body.email,
+            matkhau: req.body.matkhau,
+            hoten: req.body.hoten,
+            sodienthoai: req.body.sodienthoai,
+            diachi: req.body.diachi
+        }
+    )
+    .then(data=>{
+        console.log(data)
+        res.send({name: data.email})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
 
+//4.3.DELETE NGUOI DUNG
+router.delete('/themnguoidung/:id',urlencodedParser, function(req,res,next){
+    console.log(req.body)
+    useModel.findByIdAndDelete({_id:req.body.id})
+    .then(data=>{
+        console.log(data)
+        res.send({name: "Đã xóa"})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
 
 module.exports = router;
