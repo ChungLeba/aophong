@@ -9,7 +9,8 @@ var aothunSchema = new mongoose.Schema({
     thuonghieu: String,
     size: [String],
     mausac: [String],
-    gia: Number
+    gia: Number,
+    imgurl: [String]
     },{collection : 'aothuns'})
     
 var aothunModel = mongoose.model('aothunModel',aothunSchema)

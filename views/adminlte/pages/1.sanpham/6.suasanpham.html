@@ -267,9 +267,20 @@
               <label for="inputName">Tên áo thun</label>
               <input type="text" id="ten" class="form-control" value="<%- data.ten %>">
             </div>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Chọn hình ảnh</label>
+            <div class="mb-3">
+              <label for="formFileMultiple" class="form-label">Thêm hình ảnh</label>
+              <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+            <!-- update hình ảnh -->
+            
+            <div class="row justify-content-md-center">
+              <% for( let index = 0; index < data.imgurl.length; index++ ) { %>
+              <div class="col">
+                <img id="img_<%- index+1 %>" width="100" height="100" src="../../../uploads/<%-data.imgurl[index]%>" alt="Product Image">
+                <br>
+                <button id="imgxoa_<%- index+1 %>"  type="button" class="btn btn-warning">Xóa</button>
+              </div>
+              <% } %>
             </div>
             <div class="form-group">
               <label for="inputDescription">Mô tả áo thun</label>
@@ -279,9 +290,34 @@
               <label for="inputClientCompany">Thương hiệu</label>
               <input type="text" id="thuonghieu" class="form-control" value="<%- data.thuonghieu %>">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="div_size">
               <label for="inputClientCompany">Chọn Size</label>
-              <input type="text" id="size" class="form-control" value="<%- data.size %>">
+              <br>
+              <!-- <input type="text" id="size" class="form-control" value="<%- data.size %>"> -->
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="size1" value="S">
+                <label class="form-check-label" for="inlineCheckbox1">S</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="size2" value="M">
+                <label class="form-check-label" for="inlineCheckbox1">M</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="size3" value="L">
+                <label class="form-check-label" for="inlineCheckbox1">L</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="size4" value="XL">
+                <label class="form-check-label" for="inlineCheckbox1">XL</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="size5" value="XXL">
+                <label class="form-check-label" for="inlineCheckbox1">XXL</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="size6" value="3XL">
+                <label class="form-check-label" for="inlineCheckbox1">3XL</label>
+              </div>
             </div>
             <!-- <div class="form-group">
               <label>Chọn Size</label>
@@ -340,15 +376,105 @@
 </script>
 <script>
   $(document).ready(function(){
+    let sizerm = '<%- data.size %>'
+    sizerm = sizerm.split(",")
+    console.log(sizerm)
+    for (let index = 0; index < sizerm.length; index++) {
+      if (sizerm[index] === "S") {
+        $("#size1").attr("checked","checked")
+      }
+      else if (sizerm[index] === "M") {
+        $("#size2").attr("checked","checked")
+      }
+      else if (sizerm[index] === "L") {
+        $("#size3").attr("checked","checked")
+      }
+      else if (sizerm[index] === "XL") {
+        $("#size4").attr("checked","checked")
+      }
+      else if (sizerm[index] == "XXL") {
+        $("#size5").attr("checked","checked")
+      } 
+      else if (sizerm[index] == "3XL") {
+        $("#size6").attr("checked","checked")
+      }     
+      console.log(sizerm[index])  
+    }
+    // Xóa hình ảnh
+    let imgrm = '<%- data.imgurl %>'
+    for (let index = 0; index < imgrm.length; index++) {
+      let i = index +1
+      $("#imgxoa_"+i).click(function(){
+        let imgxoa =  $("#img_"+i).attr("src").replace("../../../uploads/","")
+        //alert("Xóa: "+ imgxoa)
+        let ok = confirm("Bạn có chắc chắn muốn xóa hình ảnh này?") 
+        console.log(ok)  
+        if (ok==true) 
+        {
+            var urlid = window.location.pathname;
+            console.log(urlid)
+            urlid = urlid.replace('/admin/sp/edit/','')
+            $.ajax({
+                url:'/admin/sp/img/'+urlid,
+                type:'DELETE',
+                dataType: 'json',
+                data: {
+                        id: urlid,
+                        imgxoa: imgxoa
+                    },
+                success: function(res){
+                    console.log(res)
+                    alert(res.name)
+                    location.reload()
+                }
+            })
+        } 
+    })      
+    }
     
+    //Lưu sửa đổi dữ liệu
     $("#luu").click(function(){
       var ten = $("#ten").val();
       var mota = $("#mota").val();
       var thuonghieu = $("#thuonghieu").val();
-      var size = $("#size").val();
-      var mausac = $("#mausac").val();
+      //var size = $("#size").val();
+      var mausac = $("#mausac").val().split(",");
+      mausac = JSON.stringify(mausac)
       var dongia = $("#dongia").val();
       //console.log(ten, mota, thuonghieu, size, mausac, dongia)
+      var size = []
+      console.log(size)
+      if($("#size1").is(":checked") == true){
+        size.push($("#size1").val())
+      }
+      if($("#size2").is(":checked") == true){
+        size.push($("#size2").val())
+      }
+      if($("#size3").is(":checked") == true){
+        size.push($("#size3").val())
+      }
+      if($("#size4").is(":checked") == true){
+        size.push($("#size4").val())
+      }
+      if($("#size5").is(":checked") == true){
+        size.push($("#size5").val())
+      }
+      if($("#size6").is(":checked") == true){
+        size.push($("#size6").val())
+      }
+      size = JSON.stringify(size)
+      // FORM UPLOAD
+      var data = new FormData()
+      data.append("ten", ten)
+      data.append("mota", mota)
+      data.append("thuonghieu", thuonghieu)
+      data.append("mausac", mausac)
+      data.append("gia", dongia)
+      data.append("size", size)
+
+      for (let index = 0; index < $("#formFileMultiple")[0].files.length; index++) {
+        data.append("imgurl",$("#formFileMultiple")[0].files[index])
+      }
 
       if(ten==''){
         alert("Tên sản phẩm không được trống")
@@ -359,19 +485,20 @@
         $.ajax({
             url:'/admin/sp/'+urlid,
             type:'PUT',
-            dataType: 'json',
-            data: {
+            data:data /* {
                     ten: ten,
                     mota: mota,
                     thuonghieu: thuonghieu,
                     size: size,
                     mausac: mausac,
                     gia: dongia
-                },
+                } */,
+                contentType: false,
+                processData: false,
             success: function(res){
                 console.log(res)
                 alert(res.name+" Đã được sửa")
-                //location.reload()
+                location.reload()
             }
         })
       }

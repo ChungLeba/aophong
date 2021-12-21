@@ -261,48 +261,68 @@
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
-        <div class="row">
-          <div class="card-body">
-            <div class="form-group">
-              <label for="inputName">Tên áo thun</label>
-              <input type="text" id="ten" class="form-control">
-            </div>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Chọn hình ảnh</label>
-            </div>
-            <div class="form-group">
-              <label for="inputDescription">Mô tả áo thun</label>
-              <textarea id="mota" class="form-control" rows="4"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="inputClientCompany">Thương hiệu</label>
-              <input type="text" id="thuonghieu" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="inputClientCompany">Chọn Size</label>
-              <input type="text" id="size" class="form-control">
-            </div>
-            <!-- <div class="form-group">
-              <label>Chọn Size</label>
-              <select id="size" multiple="" class="form-control">
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-                <option>XXL</option>
-              </select>
-            </div> -->
-            <div class="form-group">
-              <label for="inputProjectLeader">Màu sắc</label>
-              <input type="text" id="mausac" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="inputProjectLeader">Đơn giá</label>
-              <input type="number" id="dongia" class="form-control">
+        <form action="" method="post" id="formtest">
+          <div class="row">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputName">Tên áo thun</label>
+                <input type="text" id="ten" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Chọn hình ảnh</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Mô tả áo thun</label>
+                <textarea id="mota" class="form-control" rows="4"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Thương hiệu</label>
+                <input type="text" id="thuonghieu" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Chọn Size</label>
+                <br>
+                <!-- <input type="text" id="size" class="form-control"> -->
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="size1" value="S">
+                  <label class="form-check-label" for="inlineCheckbox1">S</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="size2" value="M">
+                  <label class="form-check-label" for="inlineCheckbox1">M</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="size3" value="L">
+                  <label class="form-check-label" for="inlineCheckbox1">L</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="size4" value="XL">
+                  <label class="form-check-label" for="inlineCheckbox1">XL</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="size5" value="XXL">
+                  <label class="form-check-label" for="inlineCheckbox1">XXL</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="size6" value="3XL">
+                  <label class="form-check-label" for="inlineCheckbox1">3XL</label>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="inputProjectLeader">Màu sắc (ngăn cách các màu bằng dấu ",")</label>
+                <input type="text" id="mausac" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">Đơn giá</label>
+                <input type="number" id="dongia" class="form-control">
+              </div>
             </div>
           </div>
-        </div>
+
+        </form>
+        
         <div class="col-sm-3">
           <button id="luu" type="button" class="btn btn-block btn-success btn-lg">Lưu dữ liệu</button> 
           <br>
@@ -368,29 +388,59 @@
       var ten = $("#ten").val();
       var mota = $("#mota").val();
       var thuonghieu = $("#thuonghieu").val();
-      var size = $("#size").val();
+      //var size = $("#size").val();
+      var size = []
+      console.log(size)
+      if($("#size1").is(":checked") == true){
+        size.push($("#size1").val())
+      }
+      if($("#size2").is(":checked") == true){
+        size.push($("#size2").val())
+      }
+      if($("#size3").is(":checked") == true){
+        size.push($("#size3").val())
+      }
+      if($("#size4").is(":checked") == true){
+        size.push($("#size4").val())
+      }
+      if($("#size5").is(":checked") == true){
+        size.push($("#size5").val())
+      }
+      if($("#size6").is(":checked") == true){
+        size.push($("#size6").val())
+      }
+      //size.push($("#size1").val(), $("#size2").val(), $("#size3").val(), $("#size4").val(), $("#size5").val(), $("#size6").val())
+      //console.log(size)
       var mausac = $("#mausac").val();
       var dongia = $("#dongia").val();
       //console.log(ten, mota, thuonghieu, size, mausac, dongia)
+      var imgurl = $("#formFileMultiple")
+      console.log($("#formtest"))
+      console.log(imgurl)
+      var data = new FormData();
+      data.append("ten",ten)
+      data.append("mota",mota)
+      data.append("thuonghieu",thuonghieu)
+      data.append("size",size)
+      data.append("mausac",mausac)
+      data.append("gia",dongia)
+      for (let index = 0; index < $("#formFileMultiple")[0].files.length; index++) {
+        data.append("imgurl",$("#formFileMultiple")[0].files[index])
+      }
+      
       if(ten==''){
         alert("Tên sản phẩm không được trống")
       } else {
         $.ajax({
             url:'/admin/themsanpham',
             type:'POST',
-            dataType: 'json',
-            data: {
-                    ten: ten,
-                    mota: mota,
-                    thuonghieu: thuonghieu,
-                    size: size,
-                    mausac: mausac,
-                    gia: dongia
-                },
+            data:data,
+                contentType: false,
+                processData: false,
             success: function(res){
                 console.log(res)
                 alert("Áo thun: "+res.name+" Đã được thêm")
-                //location.reload()
+                location.reload()
             }
       })
       }

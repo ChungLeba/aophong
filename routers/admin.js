@@ -1,14 +1,32 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+const multer  = require('multer')
+
 var aothunModel = require('../models/aothunmodel')
 var useModel = require('../models/usemodel')
+require('dotenv').config()
+var jwt = require('jsonwebtoken');
+
 //BODYPASER
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const { listIndexes } = require('../models/aothunmodel');
 var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-
+//UPLOAD
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/uploads/')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, uniqueSuffix + '-' + file.originalname.replace(' ','-'))
+    }
+  })
+const upload = multer({ storage: storage })
+//DELETE FILE
+var fs = require('fs')
 
 //LOGIN
 //GET
@@ -37,6 +55,12 @@ router.post('/',urlencodedParser, function(req,res,next){
     .catch(err=>{
         console.log(err)
     })
+})
+//POST CHECK JWT
+router.post('/jwt',urlencodedParser, function(req,res,next){
+    console.log(req.body)
+    const token = jwt.sign({ email: req.body.email }, process.env.LOGINJWT, {expiresIn: "1h"});
+    res.json(token)
 })
 
 
@@ -79,16 +103,31 @@ router.get('/themsanpham', function(req,res,next){
     //res.sendFile(path.join(__dirname, '../views/adminlte/pages/1.sanpham/2.themsanpham.html'))
     res.render("./adminlte/pages/1.sanpham/2.themsanpham.html")
 })
-router.post('/themsanpham',urlencodedParser, function(req,res,next){
+router.post('/themsanpham',urlencodedParser,upload.array('imgurl', 10), function(req,res,next){
     console.log(req.body)
+    //console.log(req.files)
+    let imgurls= [];
+
+    for (let index = 0; index < req.files.length; index++) {
+        imgurls.push(req.files[index].filename)
+    }
+    console.log(imgurls)
+    let size = req.body.size.split(",")
+
+    let mausac = req.body.mausac.replace(/\s/g,'')
+    console.log(mausac)
+    mausac = mausac.split(",")
+    console.log(mausac)
+
     aothunModel.create(
         {
         ten: req.body.ten,
         mota: req.body.mota,
         thuonghieu: req.body.thuonghieu,
-        size: req.body.size,
-        mausac: req.body.mausac,
+        size: size,
+        mausac: mausac,
         gia: req.body.gia,
+        imgurl:imgurls
         }
     )
     .then(data=>{
@@ -108,17 +147,28 @@ router.get('/sp/edit/:id', function(req,res,next){
         res.render("./adminlte/pages/1.sanpham/6.suasanpham.html",{data:data})
     })
 })
-router.put('/sp/:id',urlencodedParser, function(req,res,next){
+router.put('/sp/:id',urlencodedParser,upload.array('imgurl', 10), function(req,res,next){
     //console.log(req.params.id)
-    //console.log(req.body)
+    console.log(req.body)
+    /* console.log(req.body.size)
+    let size = JSON.parse(req.body.size)
+    console.log(size) */
+
+    let imgurls= [];
+
+    for (let index = 0; index < req.files.length; index++) {
+        imgurls.push(req.files[index].filename)
+    }
+
     aothunModel.findByIdAndUpdate({_id:req.params.id},
         {
         ten: req.body.ten,
         mota: req.body.mota,
         thuonghieu: req.body.thuonghieu,
-        size: req.body.size,
-        mausac: req.body.mausac,
+        size: JSON.parse(req.body.size),
+        mausac: JSON.parse(req.body.mausac),
         gia: req.body.gia,
+        $push: {imgurl:imgurls}
         }
     )
     .then(data=>{
@@ -134,6 +184,25 @@ router.put('/sp/:id',urlencodedParser, function(req,res,next){
 router.delete('/sp/:id',urlencodedParser, function(req,res,next){
     //console.log(req.params.id)
     console.log(req.body)
+    //Tìm xóa file
+    aothunModel.findById({_id:req.body.id})
+    .then(data=>{
+        console.log(data.imgurl)
+        if (data) {
+            //Xóa file hình
+            for (let index = 0; index < data.imgurl.length; index++) {
+                fs.unlink('public/uploads/'+data.imgurl[index], function (err){
+                    if (err) throw err;
+                    console.log('File deleted!');
+            })
+        }
+        
+    }
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    //Xóa bài
     aothunModel.findByIdAndDelete({_id:req.body.id}
     )
     .then(data=>{
@@ -144,7 +213,32 @@ router.delete('/sp/:id',urlencodedParser, function(req,res,next){
         console.log(err)
     })
 })
+//2.6 LOẠI BỎ HÌNH ẢNH SẢN PHẨM
+router.delete('/sp/img/:id',urlencodedParser, function(req,res,next){
+    //console.log(req.params.id)
+    console.log(req.body)
+    //Xóa file
+    fs.unlink('public/uploads/'+req.body.imgxoa, function (err){
+        if (err) throw err;
+        console.log('File deleted!');
+    })
+    //Xóa đường dẫn trong csdl
+    aothunModel.findByIdAndUpdate({_id:req.params.id},
+        {
+        $pull: {imgurl:req.body.imgxoa}
+        }
+    )
+    .then(data=>{
+        //console.log(data)
+        
+        res.send({name: "Đã xóa"})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 
+
+})
 
 //3.DON DAT HANG
 router.get('/quanlydonhang', function(req,res,next){
