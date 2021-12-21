@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path')
 const useModel = require('../models/usemodel')
-// const donhangModel = require('../models/donhangmodel')
+const auth = require('../middlewares/auth')
 
 //1.TRANG CHU
 router.get('/home', function(req,res,next){
@@ -14,7 +14,7 @@ router.get('/ao-phong/:id', function(req,res,next){
 })
 router.post('/', async(req, res) => {
     try {
-          user = new UserModel(req.body)
+          user = new useModel(req.body)
          await user.save()
          await user.generateAuthToken()
          await user.generateCart()
@@ -24,9 +24,28 @@ router.post('/', async(req, res) => {
     }
  })
  router.post('/login', async(req, res) => {
-    const user = await UserModel.findByCredentials(req.body.email, req.body.password)
-    await user.generateAuthToken()
+    const user = await useModel.findByCredentials(req.body.email, req.body.matkhau)
+    const token = await user.generateAuthToken()
+    req.header('Authorization') = token
     res.send(user)
+})
+router.post('/logout', auth, async(req, res) => {
+    try {
+         req.user.tokens = req.user.tokens.filter((token) => token.token !== req.token)
+         await req.user.save()
+         res.status(201).send()
+    } catch (error) {
+         res.status(500).send(error)
+    }
+})
+router.post('/logoutall', auth, async(req, res) => {
+    try {
+         req.user.tokens = []
+         await req.user.save()
+         res.status(201).send()
+    } catch (error) {
+         res.status(500).send(error)
+    }
 })
 
 

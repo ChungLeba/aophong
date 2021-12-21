@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const donhangModel = require('../models/donhangmodel')
 const giohangModel = require('../models/giohangmodel')
+const aothunModel = require('../models/aothunmodel')
+const useModel = require('../models/usemodel')
 const auth = require('../middlewares/auth')
 
 router.post('/order/add', auth, async(req, res) => {
@@ -14,13 +16,13 @@ router.post('/order/add', auth, async(req, res) => {
             return data[field] = req.body[field]
         })
         const order = await donhangModel.create(data)
-
-// thêm vào trường order của bảng user
-    //    const user = await UserModel.findById(_id)
-    //    user.orders = user.orders.concat(order._id)
-    //    await user.save()
+//xóa hàng hóa đã bán trong bảng item
+        data.list.forEach(async(item)=> {
+        await  aothunModel.findByIdAndUpdate(item.aothunID, { $inc: { soluong: -item.soluong } })
+        })
+    
 // xóa dữ liệu trường list trong bảng cart
-        await giohangModel.findOneAndUpdate({ khachhangID: _id }, { donhang: [] })
+        await giohangModel.findOneAndUpdate({ khachhangID: _id }, { donhang: [], tongtien: 0 })
         res.send(order)
     } catch (error) {
         res.send(error)

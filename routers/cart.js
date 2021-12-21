@@ -4,21 +4,44 @@ const donhangModel = require('../models/donhangmodel')
 const giohangModel = require('../models/giohangmodel')
 const auth = require('../middlewares/auth')
 
-router.post('/cart/add', auth, async(req, res) => {
+router.post('/add-to-cart/:id', auth, async(req, res) => {
     try {
-        const { aothunID, soluong } = req.body
-       let cart = await giohangModel.findOne({ userID: req.user._id })
-       cart.list = cart.list.concat({ aothunID, soluong })
-       await cart.save()
-       res.send()
+//req.body là object gồm aothunID và soluong, gia
+       const cart = await giohangModel.findOne({ khachhangID: req.user._id })
+// thêm sp vào trường donhang của bảng giohang và cập nhật tổng tiền;  xem chi tiết function trong model
+        const item = await cart.addItem(req.body)    
+        res.status(201).send(cart)
       
     } catch (error) {
-        res.send(error)
+        res.status(500).send(error)
     }
 })
-router.get('/cart', auth, async(req, res) => {
-    const cart = await giohangModel.findOne({ userID: req.user._id })
-    res.send(cart)
+router.post('/add-by-one/:id', auth, async(req, res) => {
+    try {
+         const cart = await giohangModel.findOne({ khachhangID: req.user._id })
+         const addedItem = await cart.addByOne(req.params.id)
+         res.status(201).send(addedItem)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+ })
+ router.post('/cart/reduce/:id', auth, async(req, res) => {
+    try {
+         const cart = await giohangModel.findOne({ khachhangID: req.user._id })
+         const reduceItem = await cart.reduceByOne(req.params.id)
+         res.status(201).send(reduceItem)
+    } catch (error) {
+     res.status(500).send(error)
+    }
+ })
+router.get('/', auth, async(req, res) => {
+   try {
+        const cart = await giohangModel.findOne({ khachhangID: req.user._id })
+        res.status(201).send(cart)
+   } catch (error) {
+        res.status(500).send(error)
+   }
 })
+
 
 module.exports = router
