@@ -8,6 +8,7 @@ var customerRouter = require('./routers/customer.js');
 var indexRouter = require('./routers/index.js');
 const cartRouter = require('./routers/cart')
 const orderRouter = require('./routers/order')
+const aothunRouter = require('./routers/aothun')
 //STATIC FOLDER
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
@@ -40,7 +41,7 @@ app.use('/c', customerRouter)
 app.use('/', indexRouter)
 app.use('/cart', cartRouter)
 app.use('/order', orderRouter)
-
+app.use('/aothun', aothunRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
