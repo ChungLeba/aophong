@@ -5,10 +5,12 @@ mongoose.connect('mongodb+srv://nodemy:nodemyabc@cluster0.oihzb.mongodb.net/aoph
 var useSchema = new mongoose.Schema({
     phanquyen: Number, //1: admin, 2: nhanvien, 3: khach hang
     email: String,
-    matkhau: String,
+    /* matkhau: String, */
     hoten: String,
     sodienthoai: String,
     diachi: String,
+    hash: String,
+    salt: String
     },{collection : 'uses'})
     
 var useModel = mongoose.model('useModel',useSchema)

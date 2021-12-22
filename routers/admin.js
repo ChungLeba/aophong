@@ -25,8 +25,10 @@ const storage = multer.diskStorage({
     }
   })
 const upload = multer({ storage: storage })
-//DELETE FILE
-var fs = require('fs')
+//CRYPTO
+var crypto = require("crypto")
+
+
 
 //LOGIN
 //GET
@@ -38,17 +40,29 @@ router.get('/', function(req,res,next){
 //POST CHECK ACC
 router.post('/',urlencodedParser, function(req,res,next){
     //console.log(req.body)
+    console.log(req.body.pass)
     useModel.findOne({
-        email: req.body.email,
-        matkhau: req.body.pass
+        email: req.body.email
     })
     .then(data=>{
-        //console.log(data)
+        console.log(data)
         if(data){
-            res.redirect("/admin/quanly")
-            
-        } else {
-            res.render("./adminlte/pages/3.use/2.login.html",{mes:"Vui lòng kiểm tra lại tài khoản và mật khẩu !!!"})
+            let hash_check = crypto.pbkdf2Sync(req.body.pass, data.salt, 2000, 64,'sha512')
+            hash_check = hash_check.toString('hex')
+            console.log(hash_check)
+            if(
+                hash_check == data.hash
+            ){
+                res.redirect("/admin/quanly")
+                
+            } 
+            else if(hash_check != data.hash){
+                res.render("./adminlte/pages/3.use/2.login.html",{mes:"Mật khẩu sai !!!"})
+            }
+        }
+
+        if(data == null) {
+            res.render("./adminlte/pages/3.use/2.login.html",{mes:"Tài khoản không tồn tại"})
             //res.send({mes:"Vui lòng kiểm tra lại tài khoản và mật khẩu"})
         }
     })
@@ -262,23 +276,28 @@ router.get('/themnguoidung', function(req,res,next){
     res.render("./adminlte/pages/1.sanpham/3.1.themnguoidung.html")
 })
 router.post('/themnguoidung',urlencodedParser, function(req,res,next){
-    //console.log(req.body)
+    console.log(req.body)
     useModel.findOne({
         email: req.body.email
     })
     .then(data=>{
-        //console.log(data)
+        console.log(data)
         if(data){
             res.send({err: "Email đã tồn tại"})
         } else {
+            let salt = crypto.randomBytes(32).toString('hex');
+            let hash = crypto.pbkdf2Sync(req.body.matkhau, salt, 2000, 64, 'sha512')
+            hash = hash.toString('hex')
+            //console.log(salt, hash)
             useModel.create(
                 {
                     phanquyen: req.body.phanquyen,
                     email: req.body.email,
-                    matkhau: req.body.matkhau,
                     hoten: req.body.hoten,
                     sodienthoai: req.body.sodienthoai,
-                    diachi: req.body.diachi
+                    diachi: req.body.diachi,
+                    hash: hash,
+                    salt: salt
                 }
             )
             .then(data=>{
@@ -307,14 +326,18 @@ router.get('/themnguoidung/:id',urlencodedParser, function(req,res,next){
 
 router.put('/themnguoidung/:id',urlencodedParser, function(req,res,next){
     console.log(req.body)
+    let salt = crypto.randomBytes(32).toString('hex');
+    let hash = crypto.pbkdf2Sync(req.body.matkhau, salt, 2000, 64, 'sha512')
+    hash = hash.toString('hex')
     useModel.findByIdAndUpdate({_id:req.params.id},
         {
             phanquyen: req.body.phanquyen,
             email: req.body.email,
-            matkhau: req.body.matkhau,
             hoten: req.body.hoten,
             sodienthoai: req.body.sodienthoai,
-            diachi: req.body.diachi
+            diachi: req.body.diachi,
+            hash: hash,
+            salt: salt
         }
     )
     .then(data=>{
