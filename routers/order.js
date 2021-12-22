@@ -4,9 +4,9 @@ const donhangModel = require('../models/donhangmodel')
 const giohangModel = require('../models/giohangmodel')
 const aothunModel = require('../models/aothunmodel')
 const useModel = require('../models/usemodel')
-const auth = require('../middlewares/auth')
+const checkLogin = require('../middlewares/checkLogin')
 
-router.post('/order/add', auth, async(req, res) => {
+router.post('/order/add', checkLogin, async(req, res) => {
     try {
 // thêm đơn hàng mới vào bảng order
         const _id = req.user._id

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path')
 const useModel = require('../models/usemodel')
-const auth = require('../middlewares/auth')
+const checkLogin = require('../middlewares/checkLogin')
 
 //1.TRANG CHU
 router.get('/home', function(req,res,next){
@@ -16,7 +16,6 @@ router.post('/', async(req, res) => {
     try {
           user = new useModel(req.body)
          await user.save()
-         await user.generateAuthToken()
          await user.generateCart()
          res.status(201).send(user)
     } catch (error) {
@@ -24,28 +23,22 @@ router.post('/', async(req, res) => {
     }
  })
  router.post('/login', async(req, res) => {
-    const user = await useModel.findByCredentials(req.body.email, req.body.matkhau)
-    const token = await user.generateAuthToken()
-    req.header('Authorization') = token
-    res.send(user)
-})
-router.post('/logout', auth, async(req, res) => {
     try {
-         req.user.tokens = req.user.tokens.filter((token) => token.token !== req.token)
-         await req.user.save()
-         res.status(201).send()
+          const user = await useModel.findByCredentials(req.body.email, req.body.matkhau)
+          const token = await user.generateAuthToken()
+          res.json({mess: 'Dang nhap thanh cong', status: 200, userToken: token})
+          //setCookie viết ở JQuery
     } catch (error) {
-         res.status(500).send(error)
+         res.send(error)
     }
+    
 })
-router.post('/logoutall', auth, async(req, res) => {
-    try {
-         req.user.tokens = []
-         await req.user.save()
-         res.status(201).send()
-    } catch (error) {
-         res.status(500).send(error)
-    }
+router.post('/logout', checkLogin, async(req, res) => {
+     try {
+          await blackListModel.create({ token: req.cookies.userToken })
+      } catch (error) {
+           res.json('Loi server')
+         }
 })
 
 

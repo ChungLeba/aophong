@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const donhangModel = require('../models/donhangmodel')
 const giohangModel = require('../models/giohangmodel')
-const auth = require('../middlewares/auth')
+const checkLogin = require('../middlewares/checkLogin')
 
 router.post('/add-to-cart/:id', auth, async(req, res) => {
     try {
@@ -16,7 +16,7 @@ router.post('/add-to-cart/:id', auth, async(req, res) => {
         res.status(500).send(error)
     }
 })
-router.post('/add-by-one/:id', auth, async(req, res) => {
+router.post('/add-by-one/:id', checkLogin, async(req, res) => {
     try {
          const cart = await giohangModel.findOne({ khachhangID: req.user._id })
          const addedItem = await cart.addByOne(req.params.id)
@@ -25,7 +25,7 @@ router.post('/add-by-one/:id', auth, async(req, res) => {
         res.status(500).send(error)
     }
  })
- router.post('/cart/reduce/:id', auth, async(req, res) => {
+ router.post('/cart/reduce/:id', checkLogin, async(req, res) => {
     try {
          const cart = await giohangModel.findOne({ khachhangID: req.user._id })
          const reduceItem = await cart.reduceByOne(req.params.id)
@@ -34,7 +34,7 @@ router.post('/add-by-one/:id', auth, async(req, res) => {
      res.status(500).send(error)
     }
  })
-router.get('/', auth, async(req, res) => {
+router.get('/', checkLogin, async(req, res) => {
    try {
         const cart = await giohangModel.findOne({ khachhangID: req.user._id })
         res.status(201).send(cart)
