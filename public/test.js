@@ -1,4 +1,4 @@
-/* require('dotenv').config()
+require('dotenv').config()
 var jwt = require('jsonwebtoken');
 
 var token = jwt.sign({foo: 'bar' }, process.env.LOGINJWT, {expiresIn: "1h"});
@@ -12,7 +12,7 @@ jwt.verify(token, 'process.env.LOGINJWT', function(err, data){
     } else {
         //console.log("data: ",data)
     }
-}) */
+})
 
 
 
@@ -55,12 +55,12 @@ decryptedData += decipher.final("utf8");
 console.log("Decrypted message: " + decryptedData);
  */
 
-const crypto = require("crypto")
+/* const crypto = require("crypto")
 //const salt = crypto.randomBytes(32).toString('hex')
 const salt = '719949e72667078d571f76117b670277ceb76aafda21c4e8d82408eb733568bc'
 
 const key = crypto.pbkdf2Sync('456', salt, 2000, 64,'sha512')
 
 //console.log(salt)
-console.log('key chuẩn:'+ key.toString('hex'))
+console.log('key chuẩn:'+ key.toString('hex')) */
 

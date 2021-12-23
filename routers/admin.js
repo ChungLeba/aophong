@@ -5,8 +5,40 @@ const multer  = require('multer')
 
 var aothunModel = require('../models/aothunmodel')
 var useModel = require('../models/usemodel')
+//XÁC THỰC & PHÂN QUYỀN
 require('dotenv').config()
 var jwt = require('jsonwebtoken');
+//Kiểm tra login quản lý và nhân viên
+var checklogin = function(req,res,next){
+    let token = req.cookies.token
+    console.log(token)
+    jwt.verify(token, process.env.LOGINJWT, function(err, data){
+        if(err){
+            //console.log(err)
+            res.redirect('/admin')
+        } else {
+            console.log("Token hợp lệ: ", data)
+            //tìm quyền
+            useModel.findById({_id:data.id})
+            .then(data=>{
+                req.permis = parseInt(data.phanquyen)
+                console.log('Quyền user này: '+req.permis)
+                return next()
+            })
+            
+            
+        }
+    })
+}
+//Kiểm tra quyền hạn
+var checkpermis = function(req,res,next){
+    if (req.permis===1){
+        return next()
+    } else {
+        res.send("Chỉ có quản lý mới có quyền này, vui lòng liên hệ Quản lý của cửa hàng")
+    }
+    
+}
 
 //BODYPASER
 var bodyParser = require('body-parser');
@@ -49,10 +81,13 @@ router.post('/',urlencodedParser, function(req,res,next){
         if(data){
             let hash_check = crypto.pbkdf2Sync(req.body.pass, data.salt, 2000, 64,'sha512')
             hash_check = hash_check.toString('hex')
-            console.log(hash_check)
+            //console.log(hash_check)
             if(
                 hash_check == data.hash
-            ){
+            ){  
+                console.log('id: '+ data._id)
+                var token = jwt.sign({id:data._id}, process.env.LOGINJWT, {expiresIn: "1h"});
+                res.cookie("token", token)
                 res.redirect("/admin/quanly")
                 
             } 
@@ -70,24 +105,19 @@ router.post('/',urlencodedParser, function(req,res,next){
         console.log(err)
     })
 })
-//POST CHECK JWT
-router.post('/jwt',urlencodedParser, function(req,res,next){
-    console.log(req.body)
-    const token = jwt.sign({ email: req.body.email }, process.env.LOGINJWT, {expiresIn: "1h"});
-    res.json(token)
-})
-
 
 //CRDU
+
 //1.TRUNG TAM QUAN LY
-router.get('/quanly', function(req,res,next){
+router.get('/quanly',checklogin,
+    function(req,res,next){   
     //res.send("Trang tổng quan")
     //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
     res.render("./adminlte/index.html",{admin:"Administrator"})
 })
 //2.SAN PHAM
 //2.1 QUAN LY SAN PHAM
-router.get('/quanlysanpham', function(req,res,next){
+router.get('/quanlysanpham',checklogin, function(req,res,next){
     //res.send("Trang tổng quan san pham")
     //res.sendFile(path.join(__dirname, '../views/adminlte/pages/1.sanpham/1quanlysanpham.html'))
     aothunModel.find()
@@ -100,7 +130,7 @@ router.get('/quanlysanpham', function(req,res,next){
 })
 
 //2.2 XEM CHI TIẾT SẢN PHẨM
-router.get('/sp/:id', function(req,res,next){
+router.get('/sp/:id',checklogin, function(req,res,next){
     console.log(req.params.id)
     aothunModel.findById({_id: req.params.id})
     .then(data=>{
@@ -112,16 +142,15 @@ router.get('/sp/:id', function(req,res,next){
 
 
 //2.3 THEM SAN PHAM
-router.get('/themsanpham', function(req,res,next){
+router.get('/themsanpham',checklogin, function(req,res,next){
     //res.send("Trang tổng quan san pham")
     //res.sendFile(path.join(__dirname, '../views/adminlte/pages/1.sanpham/2.themsanpham.html'))
     res.render("./adminlte/pages/1.sanpham/2.themsanpham.html")
 })
-router.post('/themsanpham',urlencodedParser,upload.array('imgurl', 10), function(req,res,next){
+router.post('/themsanpham',checklogin,urlencodedParser,upload.array('imgurl', 10), function(req,res,next){
     console.log(req.body)
     //console.log(req.files)
     let imgurls= [];
-
     for (let index = 0; index < req.files.length; index++) {
         imgurls.push(req.files[index].filename)
     }
@@ -153,7 +182,7 @@ router.post('/themsanpham',urlencodedParser,upload.array('imgurl', 10), function
     })
 })
 //2.4 SUA SAN PHAM
-router.get('/sp/edit/:id', function(req,res,next){
+router.get('/sp/edit/:id',checklogin, function(req,res,next){
     console.log(req.params.id)
     aothunModel.findById({_id: req.params.id})
     .then(data=>{
@@ -161,7 +190,7 @@ router.get('/sp/edit/:id', function(req,res,next){
         res.render("./adminlte/pages/1.sanpham/6.suasanpham.html",{data:data})
     })
 })
-router.put('/sp/:id',urlencodedParser,upload.array('imgurl', 10), function(req,res,next){
+router.put('/sp/:id',checklogin,urlencodedParser,upload.array('imgurl', 10), function(req,res,next){
     //console.log(req.params.id)
     console.log(req.body)
     /* console.log(req.body.size)
@@ -195,7 +224,7 @@ router.put('/sp/:id',urlencodedParser,upload.array('imgurl', 10), function(req,r
 })
 
 //2.5 XOA SAN PHAM
-router.delete('/sp/:id',urlencodedParser, function(req,res,next){
+router.delete('/sp/:id',checklogin,urlencodedParser, function(req,res,next){
     //console.log(req.params.id)
     console.log(req.body)
     //Tìm xóa file
@@ -228,7 +257,7 @@ router.delete('/sp/:id',urlencodedParser, function(req,res,next){
     })
 })
 //2.6 LOẠI BỎ HÌNH ẢNH SẢN PHẨM
-router.delete('/sp/img/:id',urlencodedParser, function(req,res,next){
+router.delete('/sp/img/:id',checklogin,urlencodedParser, function(req,res,next){
     //console.log(req.params.id)
     console.log(req.body)
     //Xóa file
@@ -263,7 +292,7 @@ router.get('/quanlydonhang', function(req,res,next){
 })
 
 //4.NGUOI DUNG
-router.get('/quanlynguoidung', function(req,res,next){
+router.get('/quanlynguoidung',checklogin,checkpermis, function(req,res,next){
     useModel.find()
     .then(data=>{
         //console.log(data)
@@ -272,7 +301,7 @@ router.get('/quanlynguoidung', function(req,res,next){
     })
 })
 //4.1.THEM NGUOI DUNG
-router.get('/themnguoidung', function(req,res,next){
+router.get('/themnguoidung',checklogin,checkpermis, function(req,res,next){
     res.render("./adminlte/pages/1.sanpham/3.1.themnguoidung.html")
 })
 router.post('/themnguoidung',urlencodedParser, function(req,res,next){
@@ -314,7 +343,7 @@ router.post('/themnguoidung',urlencodedParser, function(req,res,next){
     })
 })
 //4.2.UPDATE NGUOI DUNG
-router.get('/themnguoidung/:id',urlencodedParser, function(req,res,next){
+router.get('/themnguoidung/:id',checklogin,checkpermis,urlencodedParser, function(req,res,next){
     useModel.findById({
         _id: req.params.id
     })
@@ -324,7 +353,7 @@ router.get('/themnguoidung/:id',urlencodedParser, function(req,res,next){
     
 })
 
-router.put('/themnguoidung/:id',urlencodedParser, function(req,res,next){
+router.put('/themnguoidung/:id',checklogin,checkpermis,urlencodedParser, function(req,res,next){
     console.log(req.body)
     let salt = crypto.randomBytes(32).toString('hex');
     let hash = crypto.pbkdf2Sync(req.body.matkhau, salt, 2000, 64, 'sha512')
@@ -350,7 +379,7 @@ router.put('/themnguoidung/:id',urlencodedParser, function(req,res,next){
 })
 
 //4.3.DELETE NGUOI DUNG
-router.delete('/themnguoidung/:id',urlencodedParser, function(req,res,next){
+router.delete('/themnguoidung/:id',checklogin,checkpermis,urlencodedParser, function(req,res,next){
     console.log(req.body)
     useModel.findByIdAndDelete({_id:req.body.id})
     .then(data=>{

@@ -8,7 +8,9 @@ var customerRouter = require('./routers/customer.js');
 //STATIC FOLDER
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
-
+//Cookies
+var cookiePaser = require('cookie-parser')
+app.use(cookiePaser())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
