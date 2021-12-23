@@ -63,7 +63,7 @@ var crypto = require("crypto")
 
 
 //LOGIN
-//GET
+//GET ADMIN LOGIN
 router.get('/', function(req,res,next){
     //res.send("Trang tổng quan")
     //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
@@ -104,6 +104,13 @@ router.post('/',urlencodedParser, function(req,res,next){
     .catch(err=>{
         console.log(err)
     })
+})
+//LOGOUT
+router.get('/logout', function(req,res,next){
+    //res.send("Trang tổng quan")
+    //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
+    res.clearCookie("token");
+    res.render("./adminlte/pages/3.use/2.login.html",{mes:"Vui lòng đăng nhập lại để sử dụng"})
 })
 
 //CRDU
