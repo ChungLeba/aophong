@@ -4,7 +4,7 @@ const donhangModel = require('../models/donhangmodel')
 const giohangModel = require('../models/giohangmodel')
 const checkLogin = require('../middlewares/checkLogin')
 
-router.post('/add-to-cart/:id', auth, async(req, res) => {
+router.post('/add-to-cart/:id', checkLogin, async(req, res) => {
     try {
 //req.body là object gồm aothunID và soluong, gia
        const cart = await giohangModel.findOne({ khachhangID: req.user._id })
