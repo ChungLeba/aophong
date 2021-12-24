@@ -5,8 +5,8 @@ var aothunSchema = mongoose.Schema({
     ten: String,
     mota: String,
     thuonghieu: String,
-    size: [String],
-    mausac: [String],
+    size: String, //S, M. L
+    mausac: String, //đen trắng..
     gia: Number,
     productCode: String
     },{collection : 'aothuns'})
