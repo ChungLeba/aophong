@@ -7,9 +7,12 @@ var aothunSchema = new mongoose.Schema({
     ten: String,
     mota: String,
     thuonghieu: String,
-    size: [String],
-    mausac: [String],
+    size: String,
+    mausac: String,
+    /* size: [String],
+    mausac: [String], */
     gia: Number,
+    soluong: Number,
     imgurl: [String]
     },{collection : 'aothuns'})
     

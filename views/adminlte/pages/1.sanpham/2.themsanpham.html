@@ -288,6 +288,31 @@
                 <br>
                 <!-- <input type="text" id="size" class="form-control"> -->
                 <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="size1" name="inlineRadioOptions" value="S">
+                  <label class="form-check-label" for="inlineCheckbox1">S</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="size2" name="inlineRadioOptions" value="M">
+                  <label class="form-check-label" for="inlineCheckbox1">M</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="size3" name="inlineRadioOptions" value="L">
+                  <label class="form-check-label" for="inlineCheckbox1">L</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="size4" name="inlineRadioOptions" value="XL">
+                  <label class="form-check-label" for="inlineCheckbox1">XL</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="size5" name="inlineRadioOptions" value="XXL">
+                  <label class="form-check-label" for="inlineCheckbox1">XXL</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="size6" name="inlineRadioOptions" value="3XL">
+                  <label class="form-check-label" for="inlineCheckbox1">3XL</label>
+                </div>
+                
+                <!-- <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="size1" value="S">
                   <label class="form-check-label" for="inlineCheckbox1">S</label>
                 </div>
@@ -310,16 +335,20 @@
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="size6" value="3XL">
                   <label class="form-check-label" for="inlineCheckbox1">3XL</label>
-                </div>
+                </div> -->
               </div>
               
               <div class="form-group">
-                <label for="inputProjectLeader">Màu sắc (ngăn cách các màu bằng dấu ",")</label>
+                <label for="inputProjectLeader">Màu sắc</label>
                 <input type="text" id="mausac" class="form-control">
               </div>
               <div class="form-group">
-                <label for="inputProjectLeader">Đơn giá</label>
+                <label for="inputProjectLeader">Đơn giá (vnđ)</label>
                 <input type="number" id="dongia" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">Số lượng</label>
+                <input type="number" id="soluong" class="form-control">
               </div>
             </div>
           </div>
@@ -392,7 +421,7 @@
       var mota = $("#mota").val();
       var thuonghieu = $("#thuonghieu").val();
       //var size = $("#size").val();
-      var size = []
+      /* var size = []
       console.log(size)
       if($("#size1").is(":checked") == true){
         size.push($("#size1").val())
@@ -411,11 +440,29 @@
       }
       if($("#size6").is(":checked") == true){
         size.push($("#size6").val())
+      } */
+      if($("#size1").is(":checked") == true){
+        var size = $("#size1").val()
       }
-      //size.push($("#size1").val(), $("#size2").val(), $("#size3").val(), $("#size4").val(), $("#size5").val(), $("#size6").val())
-      //console.log(size)
+      if($("#size2").is(":checked") == true){
+        var size = $("#size2").val()
+      }
+      if($("#size3").is(":checked") == true){
+        var size = $("#size3").val()
+      }
+      if($("#size4").is(":checked") == true){
+        var size = $("#size4").val()
+      }
+      if($("#size5").is(":checked") == true){
+        var size = $("#size5").val()
+      }
+      if($("#size6").is(":checked") == true){
+        var size = $("#size6").val()
+      }
+      console.log(size)
       var mausac = $("#mausac").val();
       var dongia = $("#dongia").val();
+      var soluong = $("#soluong").val();
       //console.log(ten, mota, thuonghieu, size, mausac, dongia)
       var imgurl = $("#formFileMultiple")
       console.log($("#formtest"))
@@ -427,6 +474,7 @@
       data.append("size",size)
       data.append("mausac",mausac)
       data.append("gia",dongia)
+      data.append("soluong",soluong)
       for (let index = 0; index < $("#formFileMultiple")[0].files.length; index++) {
         data.append("imgurl",$("#formFileMultiple")[0].files[index])
       }

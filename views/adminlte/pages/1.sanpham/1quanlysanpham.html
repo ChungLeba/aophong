@@ -193,12 +193,14 @@
                   <thead>
                   <tr>
                     <th>TT</th>
+                    <th>Hình Ảnh</th>
                     <th>Tên áo thun</th>
                     <th>Đơn giá (vnđ)</th>
                     <th>Mô tả</th>
                     <th>Thương hiệu</th>
                     <th>Size</th>
                     <th>Màu sắc</th>
+                    <th>Số lượng</th>
                     <th>Sửa</th>
                   </tr>
                   </thead>
@@ -206,12 +208,17 @@
                     <% for( let index = 0; index < data.length; index++ ) { %>
                       <tr>
                         <td><%-index + 1%></td>
+                        <td>
+                          <div class="product-image-thumb" ><img src="../../uploads/<%-data[index].imgurl[0]%>" alt="Product Image"></div>
+                        </td>
+
                         <td><a href="/admin/sp/<%-data[index]._id%>"><%-data[index].ten%></a></td>
                         <td><%-data[index].gia%></td>
                         <td><%-data[index].mota%></td>
                         <td><%-data[index].thuonghieu%></td>
                         <td><%-data[index].size%></td>
                         <td><%-data[index].mausac%></td>
+                        <td><%-data[index].soluong%></td>
                         <td>
                           <a href="/admin/sp/edit/<%-data[index]._id%>">
                             <button id="bt_sua<%-index%>" type="button" class="btn btn-primary">

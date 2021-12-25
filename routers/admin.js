@@ -162,21 +162,22 @@ router.post('/themsanpham',checklogin,urlencodedParser,upload.array('imgurl', 10
         imgurls.push(req.files[index].filename)
     }
     console.log(imgurls)
-    let size = req.body.size.split(",")
+    /* let size = req.body.size.split(",")
 
     let mausac = req.body.mausac.replace(/\s/g,'')
     console.log(mausac)
     mausac = mausac.split(",")
-    console.log(mausac)
+    console.log(mausac) */
 
     aothunModel.create(
         {
         ten: req.body.ten,
         mota: req.body.mota,
         thuonghieu: req.body.thuonghieu,
-        size: size,
-        mausac: mausac,
+        size: req.body.size,
+        mausac: req.body.mausac,
         gia: req.body.gia,
+        soluong: req.body.soluong,
         imgurl:imgurls
         }
     )
@@ -215,9 +216,12 @@ router.put('/sp/:id',checklogin,urlencodedParser,upload.array('imgurl', 10), fun
         ten: req.body.ten,
         mota: req.body.mota,
         thuonghieu: req.body.thuonghieu,
-        size: JSON.parse(req.body.size),
-        mausac: JSON.parse(req.body.mausac),
+        /* size: JSON.parse(req.body.size),
+        mausac: JSON.parse(req.body.mausac), */
+        size: req.body.size,
+        mausac: req.body.mausac,
         gia: req.body.gia,
+        soluong: req.body.soluong,
         $push: {imgurl:imgurls}
         }
     )
