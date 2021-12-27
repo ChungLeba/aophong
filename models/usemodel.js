@@ -10,7 +10,8 @@ var useSchema = new mongoose.Schema({
     sodienthoai: String,
     diachi: String,
     hash: String,
-    salt: String
+    salt: String,
+    lasttoken: String
     },{collection : 'uses'})
     
 var useModel = mongoose.model('useModel',useSchema)

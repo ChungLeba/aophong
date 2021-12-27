@@ -13,23 +13,37 @@ var jwt = require('jsonwebtoken');
 var checklogin = function(req,res,next){
     let token = req.cookies.token
     console.log(token)
-    jwt.verify(token, process.env.LOGINJWT, function(err, data){
-        if(err){
-            //console.log(err)
-            res.redirect('/admin')
-        } else {
-            console.log("Token hợp lệ: ", data)
-            //tìm quyền
-            useModel.findById({_id:data.id})
-            .then(data=>{
-                req.permis = parseInt(data.phanquyen)
-                console.log('Quyền user này: '+req.permis)
-                return next()
-            })
-            
-            
-        }
+    //ĐANG LÀM Ở ĐÂY: NẾU TOKEN = TOKEN ĐÃ LƯU TRONG DB KHI ĐĂNG XUẤT + NGƯỜI ĐÓ ĐÃ ĐĂNG XUẤT THÌ KO CHO PHÉP VÀO
+    useModel.findOne({
+        lasttoken: token
     })
+    .then(data=>{
+        //console.log("token:"+ data)
+        if(data){
+            console.log("Token bị rò rỉ")
+            res.send("Vui lòng liên hệ admin ^.^")
+        } else {
+            jwt.verify(token, process.env.LOGINJWT, function(err, data){
+                if(err){
+                    //console.log(err)
+                    res.redirect('/admin')
+                } else {
+                    console.log("Token hợp lệ: ", data)
+                    //tìm quyền
+                    useModel.findById({_id:data.id})
+                    .then(data=>{
+                        req.permis = parseInt(data.phanquyen)
+                        console.log('Quyền user này: '+req.permis)
+                        return next()
+                    })
+                    
+                    
+                }
+            })
+        }
+        
+    })
+    
 }
 //Kiểm tra quyền hạn
 var checkpermis = function(req,res,next){
@@ -88,6 +102,7 @@ router.post('/',urlencodedParser, function(req,res,next){
             ){  
                 console.log('id: '+ data._id)
                 var token = jwt.sign({id:data._id}, process.env.LOGINJWT, {expiresIn: "1h"});
+                
                 res.cookie("token", token)
                 res.redirect("/admin/quanly")
                 
@@ -110,6 +125,20 @@ router.post('/',urlencodedParser, function(req,res,next){
 router.get('/logout', function(req,res,next){
     //res.send("Trang tổng quan")
     //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
+    let token = req.cookies.token
+    let decoded  =  jwt.verify(token, process.env.LOGINJWT)
+    console.log(decoded.id)
+    useModel.findByIdAndUpdate({_id:decoded.id},
+        {
+            lasttoken: token
+        }
+        )
+    .then(data=>{
+        console.log(data)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
     res.clearCookie("token");
     res.render("./adminlte/pages/3.use/2.login.html",{mes:"Vui lòng đăng nhập lại để sử dụng"})
 })
@@ -173,6 +202,7 @@ router.post('/themsanpham',checklogin,urlencodedParser,upload.array('imgurl', 10
     aothunModel.create(
         {
         ten: req.body.ten,
+        masanpham: req.body.masanpham,
         mota: req.body.mota,
         thuonghieu: req.body.thuonghieu,
         size: req.body.size,
@@ -215,6 +245,7 @@ router.put('/sp/:id',checklogin,urlencodedParser,upload.array('imgurl', 10), fun
     aothunModel.findByIdAndUpdate({_id:req.params.id},
         {
         ten: req.body.ten,
+        masanpham: req.body.masanpham,
         mota: req.body.mota,
         thuonghieu: req.body.thuonghieu,
         /* size: JSON.parse(req.body.size),

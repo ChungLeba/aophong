@@ -9,6 +9,7 @@ var aothunSchema = new mongoose.Schema({
     thuonghieu: String,
     size: String,
     mausac: String,
+    masanpham: String,
     /* size: [String],
     mausac: [String], */
     gia: Number,

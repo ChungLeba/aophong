@@ -194,6 +194,7 @@
                   <tr>
                     <th>TT</th>
                     <th>Hình Ảnh</th>
+                    <th>Mã SP</th>
                     <th>Tên áo thun</th>
                     <th>Đơn giá (vnđ)</th>
                     <th>Mô tả</th>
@@ -211,7 +212,7 @@
                         <td>
                           <div class="product-image-thumb" ><img src="../../uploads/<%-data[index].imgurl[0]%>" alt="Product Image"></div>
                         </td>
-
+                        <td><%-data[index].masanpham%></td>
                         <td><a href="/admin/sp/<%-data[index]._id%>"><%-data[index].ten%></a></td>
                         <td><%-data[index].gia%></td>
                         <td><%-data[index].mota%></td>
@@ -228,7 +229,6 @@
                         </td>
                       </tr>
                     <% } %>
-                  
                   </tbody>
                 </table>
               </div>

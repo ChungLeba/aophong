@@ -270,6 +270,10 @@
               <label for="inputName">Tên áo thun</label>
               <input type="text" id="ten" class="form-control" value="<%- data.ten %>">
             </div>
+            <div class="form-group">
+              <label for="inputName">Mã sản phẩm</label>
+              <input type="text" id="masanpham" class="form-control" value="<%- data.masanpham %>">
+            </div>
             <div class="mb-3">
               <label for="formFileMultiple" class="form-label">Thêm hình ảnh</label>
               <input class="form-control" type="file" id="formFileMultiple" multiple>
@@ -289,6 +293,7 @@
               <label for="inputDescription">Mô tả áo thun</label>
               <textarea id="mota" class="form-control" rows="4"><%- data.mota %></textarea>
             </div>
+            
             <div class="form-group">
               <label for="inputClientCompany">Thương hiệu</label>
               <input type="text" id="thuonghieu" class="form-control" value="<%- data.thuonghieu %>">
@@ -358,7 +363,7 @@
             </div> -->
             <div class="form-group">
               <label for="inputProjectLeader">Màu sắc</label>
-              <input type="text" id="mausac" class="form-control" value="<%- data.mausac %>">
+              <input type="color" id="mausac" class="form-control" value="<%- data.mausac %>">
             </div>
             <div class="form-group">
               <label for="inputProjectLeader">Đơn giá</label>
@@ -485,6 +490,7 @@
     //Lưu sửa đổi dữ liệu
     $("#luu").click(function(){
       var ten = $("#ten").val();
+      var masanpham = $('#masanpham').val()
       var mota = $("#mota").val();
       var thuonghieu = $("#thuonghieu").val();
       //var size = $("#size").val();
@@ -535,6 +541,7 @@
       // FORM UPLOAD
       var data = new FormData()
       data.append("ten", ten)
+      data.append("masanpham", masanpham)
       data.append("mota", mota)
       data.append("thuonghieu", thuonghieu)
       data.append("mausac", mausac)
