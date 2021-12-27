@@ -7,13 +7,12 @@ const bcrypt = require('bcrypt')
 var useSchema = mongoose.Schema({
     phanquyen: Number, //1: admin, 2: nhanvien, 3: khach hang
     email: String,
-    matkhau: String,
+    /* matkhau: String, */
     hoten: String,
     sodienthoai: String,
     diachi: String,
-    tokens: [{
-        token: String
-    }],
+    hash: String,
+    salt: String
     },{collection : 'uses'})
 
 // định nghĩa lại định dạng user trả về ở response, không nên để password
@@ -48,14 +47,21 @@ useSchema.methods.generateCart = async function() {
     return cart
 }
 
-useSchema.pre('save', async function(next) {
-    const user = this
-//đk trả về true khi tài khoản lập mới hoặc đổi req.body có field là "password" mà k cần khác mật khẩu cũ
-    if(user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
-    }
-    next()
+//CREATE DATA
+/* useModel.create({
+    phanquyen: 3,
+    email: 'khachhang1@gmail.com',
+    matkhau: '123456',
+    hoten: "ANH HAI LUA",
+    sodienthoai: "0989 527 911",
+    diachi: "77 Le Van Thinh, Hoa Minh, Lien Chieu, Da Nang",
 })
-var useModel = mongoose.model('useModel',useSchema)
+.then(data=>{
+    console.log(data)
+})
+.catch(err=>{
+    console.log(err)
+})
+ */
 
 module.exports = useModel;

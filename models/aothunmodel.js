@@ -5,10 +5,13 @@ var aothunSchema = mongoose.Schema({
     ten: String,
     mota: String,
     thuonghieu: String,
-    size: String, //S, M. L
-    mausac: String, //đen trắng..
+    size: String,
+    mausac: String,
+    /* size: [String],
+    mausac: [String], */
     gia: Number,
-    productCode: Number
+    soluong: Number,
+    imgurl: [String]
     },{collection : 'aothuns'})
     
 var aothunModel = mongoose.model('aothunModel',aothunSchema)
