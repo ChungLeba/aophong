@@ -1,0 +1,405 @@
+body {
+
+    line-height: 1.4;
+    width: 100%;
+    letter-spacing: 0.25px;
+}
+.header{
+   
+    color: #000;
+    width: 100%;
+    
+    margin-bottom: 30px;
+    z-index: 1;
+       
+}
+
+.nav-item:hover{
+    background-color: rgb(218, 116, 116);
+    color: rgb(240, 102, 77);
+    border-radius: 5px;
+}
+.relat1 {
+    position: relative;
+}
+.subMenu {
+    position: absolute;
+    list-style: none;
+    background-color:white;
+    left: 0;
+    top:100% ;
+    width: 200px;
+    display: none;
+    padding: 0;   
+    border-radius: 5px;
+}
+.relat1:hover .subMenu{
+    display: block;
+    background-color: white;
+    color:black;
+}
+.subMenu li{
+    padding: 8px 16px;
+ }
+.subMenu li:hover{
+     background-color: rgb(218, 116, 116);
+     color: white;
+     cursor: pointer;/*chuot*/
+     border-radius: 5px;
+     
+ }
+ .relat2 {
+    position: relative;
+}
+.subMenu2 {
+    position: absolute;
+    list-style: none;
+    background-color:white;
+    left: 0;
+    top:100% ;
+    width: 200px;
+    display: none;
+    padding: 0;   
+    border-radius: 5px;
+}
+.relat2:hover .subMenu2{
+    display: block;
+    background-color: white;
+    color:black;
+}
+.subMenu2 li{
+    padding: 8px 16px;
+ }
+.subMenu2 li:hover{
+     background-color: rgb(218, 116, 116);
+     color: white;
+     cursor: pointer;/*chuot*/
+     border-radius: 5px;
+     
+ }
+ .relat3 {
+    position: relative;
+}
+.subMenu3 {
+    position: absolute;
+    list-style: none;
+    background-color:white;
+    left: 0;
+    top:100% ;
+    width: 200px;
+    display: none;
+    padding: 0;   
+    border-radius: 5px;
+}
+.relat3:hover .subMenu3{
+    display: block;
+    background-color: white;
+    color:black;
+}
+.subMenu3 li{
+    padding: 8px 16px;
+ }
+.subMenu3 li:hover{
+     background-color: rgb(218, 116, 116);
+     color: white;
+     cursor: pointer;/*chuot*/
+     border-radius: 5px;
+     
+ }
+ .relat4 {
+    position: relative;
+}
+.subMenu4 {
+    position: absolute;
+    list-style: none;
+    background-color:white;
+    left: 0;
+    top:100% ;
+    width: 200px;
+    display: none;
+    padding: 0;   
+    border-radius: 5px;
+}
+.relat4:hover .subMenu4{
+    display: block;
+    background-color: white;
+    color:black;
+}
+.subMenu4 li{
+    padding: 8px 16px;
+ }
+.subMenu4 li:hover{
+     background-color: rgb(218, 116, 116);
+     color: white;
+     cursor: pointer;/*chuot*/
+     border-radius: 5px;
+     
+ }
+.logo{
+    padding: 23px 0px;
+   
+}
+a {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
+.nav-item{
+    padding: 32px 10px;
+    margin: 0;
+    font-size: 15px;
+    display: block;
+
+}
+.container{
+    display: flex;
+    margin: auto;
+    padding: 0;
+    width: 100%;
+    padding-left: 5%;
+}
+.hidden{
+    display: flex;  
+   
+    list-style: none outside;
+}
+.nav-link{
+    padding: 0;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+
+}
+.header-right{
+    display: flex;
+  padding-right: 10%;
+   
+    
+}
+.cart-link{
+    padding: 0 10px;
+    margin: 0;
+    padding: 32px 15px;
+
+}
+.header2{
+    box-shadow: 0 2px 5px rgba(0,0,0,0.19), 0 1px 1px rgba(0,0,0,0.23);
+    display: flex;
+    width: 100%;
+    height: 85px;
+    background-color: white;
+}
+#icon1{
+   padding-top: 5px;
+   padding-left: 8px;
+}
+#nav{
+    display: flex;
+}
+.main{
+    
+    padding: 0 10px;
+    margin: 0 155px;
+    
+    display: flex;
+   
+}
+.column1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 10px;
+    width: 626px;
+    height: 740px;
+    
+}
+.img{
+    width: 100%;
+    height: 624px;
+    border: 1px solid #e1e1e1;
+}
+.page{
+    margin: auto;
+    width: 563px;
+    height: 94px;
+    background-color: blueviolet;
+}
+.column2{
+    padding: 0 10px;
+    width: 564px;
+    height: 679px;
+    
+}
+.name{
+   
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 30px;
+    border-bottom: 1px#ebebeb solid;
+    padding-bottom: 20px;
+
+}
+.Artist{
+    height: 19px;
+    
+}
+.gia{
+    padding-top: 5px;
+    padding-bottom: 10px;
+   
+    height: 50px;
+}
+.color{
+    margin-top: 10px;
+    font-weight: bold;
+    height: 79px;
+    
+}
+.size{
+    margin-top: 10px;
+    font-weight: bold;
+    height: 79px;
+    
+}
+.buy{
+    border-top: 1px#ebebeb solid;
+    width: 100%;
+    padding-top: 20px;
+    border-bottom: 1px#ebebeb solid;
+   padding-top: 20px;
+   padding-bottom: 20px;
+
+
+}
+.soluong{
+    margin-bottom: 10px;
+}
+.click{
+    height: 38px;
+    display: flex;
+    justify-content: space-between;
+}
+.them{
+   width: 49.9%;
+   height: 100%;
+   background: #a74939;
+    color: #FFF;
+    padding: 0;
+    border: 1px solid #a74939;
+    
+    font-weight: bold;
+}
+.them:hover{
+    background: #FFF;
+    color: #a74939;
+}
+.mua{
+  
+   width: 49.9%;
+   height: 100%;
+   background: #FFF;
+    color: #a74939;
+    padding: 0;
+    border: 1px solid #a74939;
+    
+    font-weight: bold;
+}
+.mua:hover{
+    background: #a74939;
+    color: #FFF;
+}
+.mota{
+    padding: 10px 0;
+    border-bottom: 1px#ebebeb solid;
+    height: 50px;
+    transition: width 3s;
+    transition-timing-function:cubic-bezier(0,1.12,.92,-0.21);
+}
+.rte{
+    display: none;
+}
+.mota:hover .rte{
+    display: block;
+   
+}
+.mota:hover{
+    height: 200px;
+}
+.column3{
+    border: 1px solid #e1e1e1;
+    padding: 0 10px;
+    width: 300px;
+    height: 261px;
+    font-size: 14px;
+    
+}
+.column3 img{
+
+    width: 45px;
+    height: 45px;
+}
+.column3 p{
+    display: flex;
+    flex-direction: column;
+}
+.muc{
+    padding: 10px 0;
+    height: 25%;
+    display: flex;
+
+}
+.container1{
+    margin: 52px 155px;
+    padding: 10px;
+    width: 1550px;
+  
+
+}
+.row1{
+    display: flex;
+    width: 100%;
+    margin: auto;
+}
+.cliked{
+    padding-bottom: 10px;   
+    margin-bottom: 20px;
+    font-size: 19px;
+   
+}
+.col_click{
+    width: 16.66666667%;
+    height: 297px;
+    padding: 0 10px;
+}
+.list-menu{
+   list-style: none;
+   padding-left: 0px;
+
+}
+.classic-text-widget img{
+    width: 15px;
+    height: 15px;
+}
+.list-menu li{ 
+   padding: 5px 0;
+   
+ 
+ }
+.cuoi{
+    margin-top: 40px;
+    background-color: #f2f2f2;
+    padding: 40px;
+
+}
+
+
+
+ 
+
+  
+ 

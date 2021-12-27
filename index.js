@@ -1,5 +1,6 @@
 const express = require('express')
-var path = require('path');
+
+const path =require("path");
 const app = express()
 const port = 3000
 //import router
@@ -46,3 +47,11 @@ app.use('/aothun', aothunRouter)
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+app.get('/home',function(req,res){
+  res.sendFile(path.join(__dirname,"./Home_page/Home_page.html"));
+})
+app.get('/detail',function(req,res){
+  res.sendFile(path.join(__dirname,"./Detail_page/Detail_page.html"));
+})
+app.use('/public',express.static(path.join(__dirname,"./public")))
