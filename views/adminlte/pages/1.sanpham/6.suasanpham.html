@@ -456,7 +456,7 @@
       let i = index +1
       $("#imgxoa_"+i).click(function(){
         let imgxoa =  $("#img_"+i).attr("src").replace("../../../uploads/","")
-        //alert("Xóa: "+ imgxoa)
+        alert("Xóa: "+ imgxoa)
         let ok = confirm("Bạn có chắc chắn muốn xóa hình ảnh này?") 
         console.log(ok)  
         if (ok==true) 
