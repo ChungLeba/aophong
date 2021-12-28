@@ -80,7 +80,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="adminlte/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="../../adminlte/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -96,7 +96,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="adminlte/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="../../adminlte/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -112,7 +112,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="adminlte/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="../../adminlte/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -226,7 +226,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/admin/quanlydonhang" class="nav-link active">
+            <a href="/admin/quanlydonhang" class="nav-link">
               <i class="fas fa-cart-arrow-down"></i>
               <p>
                 Đơn hàng
@@ -235,7 +235,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/admin/quanlynguoidung" class="nav-link">
+            <a href="/admin/quanlynguoidung" class="nav-link active">
               <i class="fas fa-users"></i>              <p>
                 Người dùng
               </p>
@@ -255,7 +255,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Quản lý đơn hàng</h1>
+            <h1 class="m-0">Thêm nhân sự cửa hàng</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -264,6 +264,52 @@
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
+        <div class="row">
+          <div class="card-body">
+            <div class="form-group">
+                <label for="inputName">Email</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="inputName">Nhập Password lần 1</label>
+                <input type="password" id="pass1" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="inputName">Nhập Password lần 2</label>
+                <input type="password" id="pass2" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="inputDescription">Họ và Tên</label>
+                <input type="text" id="hoten" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="inputClientCompany">Số điện thoại</label>
+                <input type="text" id="sodienthoai" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="inputClientCompany">Địa chỉ</label>
+              <input type="text" id="diachi" class="form-control">
+          </div>
+            <div class="form-check">
+                <input value="1" class="form-check-input" type="radio" name="check" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Quản lý (quản lý các user khác)
+                </label>
+            </div>
+            <div class="form-check">
+                <input value="2" class="form-check-input" type="radio" name="check">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Nhân viên
+                </label>
+            </div>
+
+            
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <button id="luu" type="button" class="btn btn-block btn-success btn-lg">THÊM NGƯỜI DÙNG</button> 
+          <br>
+        </div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -318,6 +364,63 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<script>
+  $(document).ready(function(){
+    
+    $("#luu").click(function(){
+      var email = $("#email").val();
+      var pass1 = $("#pass1").val();
+      var pass2 = $("#pass2").val();
+      var hoten = $("#hoten").val();
+      var diachi = $("#diachi").val();
+      var sodienthoai = $("#sodienthoai").val();
+      var phanquyen = $('input[name="check"]:checked').val();
+      console.log(email, pass1, pass2, hoten, sodienthoai, diachi, phanquyen)
+      if(email==''){
+        $("#email").css("border", "1px solid #ef0a6a")
+        alert("Email và họ tên không được bỏ trống")
+      } 
+      else {
+        if(pass1==''){
+          $("#pass1").css("border", "1px solid #ef0a6a")
+          alert("Mật khẩu không được bỏ trống")
+        } else{
+          if(pass1 != pass2){
+            $("#pass2").css("border", "1px solid #ef0a6a")
+            alert("Mật khẩu không khớp")
+          } else {
+            $.ajax({
+            url:'/admin/themnguoidung',
+            type:'POST',
+            dataType: 'json',
+            data: {
+                    email: email,
+                    matkhau: pass2,
+                    hoten: hoten,
+                    diachi: diachi,
+                    sodienthoai: sodienthoai,
+                    phanquyen: phanquyen
+                },
+            success: function(res){
+                console.log(res)
+                if(res.err){
+                  alert(res.err)
+                } else {
+                  alert("Tài khoản: "+res.name+" đã được thêm")
+                }
+                
+                //location.reload()
+            }
+            })
+          }
+        }
+      }
+      
+    })
+
+  })
+
+</script>
 <!-- Bootstrap 4 -->
 <script src="../../adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -341,7 +444,7 @@
 <!-- AdminLTE App -->
 <script src="../../adminlte/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src=".../../adminlte/dist/js/demo.js"></script>
+<script src="../../adminlte/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../adminlte/dist/js/pages/dashboard.js"></script>
 </body>

@@ -16,6 +16,9 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
+//Cookies
+var cookiePaser = require('cookie-parser')
+app.use(cookiePaser())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

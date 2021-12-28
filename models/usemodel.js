@@ -7,13 +7,16 @@ const bcrypt = require('bcrypt')
 var useSchema = mongoose.Schema({
     phanquyen: Number, //1: admin, 2: nhanvien, 3: khach hang
     email: String,
-    matkhau: String,
+    /* matkhau: String, */
     hoten: String,
     sodienthoai: String,
     diachi: String,
     tokens: [{
         token: String
     }],
+    hash: String,
+    salt: String,
+    lasttoken: String
     },{collection : 'uses'})
 
 // định nghĩa lại định dạng user trả về ở response, không nên để password
