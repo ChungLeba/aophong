@@ -302,7 +302,7 @@
                   <tbody>
                     <% for( let index = 0; index < data.length; index++ ) { %>
                       <tr>
-                        <td>1</td>
+                        <td><%- index+1 %></td>
                         <td><%- data[index].email %></td>
                         <td><%- data[index].phanquyen %></td>
                         <td><%- data[index].hoten %></td>
@@ -410,6 +410,7 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
+  
 </script>
 <!-- Bootstrap 4 -->
 <script src="../../adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

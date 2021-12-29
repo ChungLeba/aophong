@@ -21,6 +21,9 @@ router.get('/dangky', function(req,res,next){
     res.render("./adminlte/pages/3.use/1.reg.html",{mes:""})
 })
 
+router.post('/dangky', function(req,res,next){
+    
+})
 //4.TRANG CỦA KHÁCH HÀNG
 router.get('/khachhang', function(req,res,next){
     res.send("Trang của khách hàng")
