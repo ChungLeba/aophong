@@ -13,7 +13,6 @@ var jwt = require('jsonwebtoken');
 var checklogin = function(req,res,next){
     let token = req.cookies.token
     console.log(token)
-    //ĐANG LÀM Ở ĐÂY: NẾU TOKEN = TOKEN ĐÃ LƯU TRONG DB KHI ĐĂNG XUẤT + NGƯỜI ĐÓ ĐÃ ĐĂNG XUẤT THÌ KO CHO PHÉP VÀO
     useModel.findOne({
         lasttoken: token
     })
@@ -433,5 +432,7 @@ router.delete('/themnguoidung/:id',checklogin,checkpermis,urlencodedParser, func
         console.log(err)
     })
 })
+//4.4 KHACH HANG DANG KI
+
 
 module.exports = router;
