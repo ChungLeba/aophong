@@ -225,6 +225,8 @@ a {
 }
 .col{
   
+  
+
     margin: 0;
     line-height: 37px;
 }
@@ -254,14 +256,15 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover{
 }
 .row{
    color: black;
+   position: relative;
    
-   background-color: darkgrey;
-     height: 239px;
+     
      width: 1550px;
     overflow: hidden;
 }
 .listData{
     display: flex;
+   
   position: relative;
   
     color: black;
@@ -327,4 +330,64 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover{
 }
 .fa{
     color: #a74939;
+}
+.anhmoi{
+    width: 239px;
+    height: 239px;
+}
+.tensanphan{
+    margin-top: 10px;
+    margin-bottom: 5px;
+   
+}
+.tensanphan p{
+    text-align: center;
+}
+.giatiensanpham b{
+  display: flex;
+  justify-content: center;
+}
+.mausac{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.colorItem{
+    border: solid 1px darkgrey;
+    height: 28px;
+    width: 28px;
+    content: "";
+}
+.next{
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 25px;
+    height: 70px;
+    border: none;
+    background-color:#cdcdcd; ;
+}
+.back{
+   
+    display: none;
+    top: 50%;
+    left: 0;
+    position: absolute;
+    width: 25px;
+    height: 70px;
+    border: none;
+    background-color:#cdcdcd; ;
+}
+.row:hover .back{
+    display: block;
+}
+.row:hover .next{
+    display: block;
+}
+.l123{
+    
+    width: 100%;
+  
 }

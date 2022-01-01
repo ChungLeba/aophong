@@ -46,7 +46,14 @@ useSchema.methods.generateCart = async function() {
     const cart = await giohangModel.create({ userID: user._id })
     return cart
 }
-
+useSchema.pre('save', async function(next) {
+    const user = this
+//đk trả về true khi tài khoản lập mới hoặc đổi req.body có field là "password" mà k cần khác mật khẩu cũ
+    if(user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+    next()
+})
 //CREATE DATA
 /* useModel.create({
     phanquyen: 3,
@@ -63,5 +70,5 @@ useSchema.methods.generateCart = async function() {
     console.log(err)
 })
  */
-
+var useModel = mongoose.model('useModel',useSchema)
 module.exports = useModel;

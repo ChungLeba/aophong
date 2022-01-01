@@ -44,4 +44,21 @@ router.get('/', (req, res) => {
         res.status(500).send(error)
     })
 })
+router.get("/code/:code",(req,res)=>{
+    console.log(73,req.params);
+    aothunModel.find({masanpham:req.params.code})
+     .then(function(data){
+         console.log(51,data); 
+         res.json(data);
+
+     })
+     .catch(function(err){
+        
+         res.json(err);
+         
+     })
+     
+ })
+
+ //localhost:3000/aothun/luucode?k=1&codel=code
 module.exports = router
