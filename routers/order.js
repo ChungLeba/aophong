@@ -6,7 +6,7 @@ const aothunModel = require('../models/aothunmodel')
 const useModel = require('../models/usemodel')
 const checkLogin = require('../middlewares/checkLogin')
 
-router.post('/order/add', checkLogin, async(req, res) => {
+router.post('/add', checkLogin, async(req, res) => {
     try {
 // thêm đơn hàng mới vào bảng order
         const _id = req.user._id
@@ -15,9 +15,10 @@ router.post('/order/add', checkLogin, async(req, res) => {
         fields.forEach(field => {
             return data[field] = req.body[field]
         })
+        data.khachhangID = _id
         const order = await donhangModel.create(data)
-//xóa hàng hóa đã bán trong bảng item
-        data.list.forEach(async(item)=> {
+//xóa hàng hóa đã bán trong bảng aothun ở kho
+        data.donhang.forEach(async(item)=> {
         await  aothunModel.findByIdAndUpdate(item.aothunID, { $inc: { soluong: -item.soluong } })
         })
     

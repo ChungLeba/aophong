@@ -1,17 +1,17 @@
 const mongoose = require('./dbConnect');
-
 // Model
-var aothunSchema = mongoose.Schema({
+var aothunSchema = new mongoose.Schema({
     ten: String,
     mota: String,
     thuonghieu: String,
-    size: String, //S, M. L
-    mausac: String, //đen trắng..
+    size: String,
+    mausac: String,
+    masanpham: String,
     gia: Number,
-    productCode: String
+    soluong: Number,
+    imgurl: [String]
     },{collection : 'aothuns'})
     
 var aothunModel = mongoose.model('aothunModel',aothunSchema)
-
 
 module.exports = aothunModel;

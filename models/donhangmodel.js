@@ -1,11 +1,11 @@
 const mongoose = require('./dbConnect');
 
 // Model
-var donhangSchema = mongoose.Schema({
+var donhangSchema = new mongoose.Schema({
     donhang: [{
         aothunID: String, 
-        gia: Number,
         soluong: Number,
+        gia: Number,
     }],
     khachhangID: String,
     tennguoinhan: String,
@@ -13,10 +13,8 @@ var donhangSchema = mongoose.Schema({
     diachinhanhang: String,
     cachthanhtoan: String,
     trangthaidonhang: String
-    },{timestamps: true, collection : 'donhangs'})
-
-
+    },{collection : 'donhangs'})
+    
 var donhangModel = mongoose.model('donhangModel',donhangSchema)
-
 
 module.exports = donhangModel;

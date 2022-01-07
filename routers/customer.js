@@ -36,6 +36,7 @@ router.post('/', async(req, res) => {
 router.post('/logout', checkLogin, async(req, res) => {
      try {
           await blackListModel.create({ token: req.cookies.userToken })
+          res.json({ mess: 'Dang xuat thanh cong' })
       } catch (error) {
            res.json('Loi server')
          }
