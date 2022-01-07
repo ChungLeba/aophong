@@ -11,6 +11,9 @@ var useSchema = mongoose.Schema({
     hoten: String,
     sodienthoai: String,
     diachi: String,
+    tokens: [{
+        token: String
+    }],
     hash: String,
     salt: String,
     lasttoken: String
@@ -55,21 +58,6 @@ useSchema.pre('save', async function(next) {
     }
     next()
 })
-//CREATE DATA
-/* useModel.create({
-    phanquyen: 3,
-    email: 'khachhang1@gmail.com',
-    matkhau: '123456',
-    hoten: "ANH HAI LUA",
-    sodienthoai: "0989 527 911",
-    diachi: "77 Le Van Thinh, Hoa Minh, Lien Chieu, Da Nang",
-})
-.then(data=>{
-    console.log(data)
-})
-.catch(err=>{
-    console.log(err)
-})
- */
 var useModel = mongoose.model('useModel',useSchema)
+
 module.exports = useModel;
