@@ -13,7 +13,39 @@ body {
     z-index: 1;
        
 }
+.relat5 {
+    position: relative;
+}
+.subMenu5 {
+    position: absolute;
+    list-style: none;
+    background-color:white;
+    left:-150px;
+    top: 100%;
+    width: 200px;
+    display: none;
+    padding: 0;   
+    border-radius: 5px;
+}
+.relat5:hover .subMenu5{
+    display: block;
+    background-color: white;
+    color:black;
+}
+.subMenu5:hover {
+  display: block;
+}
+.subMenu5 li{
+    padding: 8px 16px;
 
+ }
+.subMenu5 li:hover{
+     background-color: rgb(218, 116, 116);
+     color: white;
+     cursor: pointer;/*chuot*/
+     border-radius: 5px;
+     
+ }
 .nav-item:hover{
     background-color: rgb(218, 116, 116);
     color: rgb(240, 102, 77);
@@ -214,18 +246,75 @@ a {
     padding: 0 10px;
     width: 626px;
     height: 740px;
+    margin-right: 20px;
     
 }
-.img{
-    width: 100%;
+.imggg{
+    width: 624px;
     height: 624px;
     border: 1px solid #e1e1e1;
+    
+    margin-bottom: 10px;
 }
 .page{
+    position: relative;
     margin: auto;
     width: 563px;
     height: 94px;
-    background-color: blueviolet;
+    
+    overflow: hidden;
+}
+.page1{
+
+    position: relative;
+    display: flex;
+    width: 563px;
+    
+
+}
+.imggg img{
+    width: 100%;
+    height: 100%; 
+    margin: 0;
+}
+
+.arrimgC{
+    width: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px #e1e1e1 solid;
+    height: 84px;
+    margin: 5px;
+   
+
+}
+.next1{
+    display: none;
+    position: absolute;
+    top: 12%;
+    right: 0;
+    width: 25px;
+    height: 70px;
+    border: none;
+    background-color:#cdcdcd; ;
+}
+.back1{
+   
+    display: none;
+    top: 12%;
+    left: 0;
+    position: absolute;
+    width: 25px;
+    height: 70px;
+    border: none;
+    background-color:#cdcdcd; ;
+}
+.page:hover .back1{
+    display: block;
+}
+.page:hover .next1{
+    display: block;
 }
 .column2{
     padding: 0 10px;
@@ -259,6 +348,16 @@ a {
     font-weight: bold;
     height: 79px;
     
+}
+.listcolor{
+    display: flex;
+    margin-top: 10px;
+}
+.colorItem{
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    border: solid 1px#cccccc;
 }
 .size{
     margin-top: 10px;
@@ -396,8 +495,29 @@ a {
     padding: 40px;
 
 }
+.listsize{
+    margin: 10px 0;
+    display: flex;
+  
 
-
+}
+.colorsize{
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    border: solid 1px#cccccc;
+    font-weight: lighter;
+}
+.Sizee{
+    
+    display: flex;
+    flex-direction: column;  
+    text-align: center;
+    margin-bottom: 0;
+    justify-content: center;
+    height: 100%;
+ 
+}
 
  
 

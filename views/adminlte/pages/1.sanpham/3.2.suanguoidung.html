@@ -255,7 +255,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Sửa nhân sự cửa hàng</h1>
+            <h1 class="m-0">Sửa người dùng</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -375,8 +375,8 @@
             </div>`
             
         )
-    } else {
-        if('<%-data.phanquyen%>'=="2"){
+    } else if('<%-data.phanquyen%>'=="2") 
+      {
         $("#user-body").append(
             `<div class="form-check">
                 <input value="1" class="form-check-input" type="radio" name="check">
@@ -390,10 +390,16 @@
                   Nhân viên
                 </label>
             </div>`
+        )
+      }
+      else if('<%-data.phanquyen%>'=="3"){
+        $("#user-body").append(
+            `<div class="form-check">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Lưu ý: Tài khoản của khách hàng
+                </label>
+            </div>`
         )}
-    }
-
-
     /* CAP NHAT DU LIEU */
     $("#luu").click(function(){
       var email = $("#email").val();

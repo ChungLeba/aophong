@@ -96,3 +96,42 @@ function gotoDetail(code){
   
 }
 //<a class="xemtatca" title="Xem tất cả">XEM TẤT CẢ</a>
+function taotaikhoan(){
+ window.location.href = 'http://localhost:3000/logon'
+
+}
+function dangnhap(){
+  window.location.href = 'http://localhost:3000/login'
+}
+function dangxuat(){
+ 
+  //...logout
+$.ajax({
+    type :"GET",
+    url:"/admin/logout" 
+})
+.then(data=>{
+  console.log(data);
+})
+.catch(err=>{
+  console.log(err);
+})
+  window.location.href = 'http://localhost:3000/login'
+  let SM5 =`
+  <li onclick="dangnhap()">Đăng Nhập</li>
+  <li onclick="taotaikhoan()">Tạo Tài Khoản</li>
+  `
+  $(".subMenu5").html(SM5)
+}
+
+$.ajax({
+  url:'/user/check',
+  type:'POST'
+}).then((data)=>{
+  if(data.status === 200){
+    let SM5 =` <li onclick="dangxuat()">Đăng Xuất</li>`
+    $(".subMenu5").html(SM5)
+  }
+}).catch(err=>{
+  console.log(135, err);
+})

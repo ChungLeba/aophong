@@ -271,6 +271,10 @@
                 <label for="inputName">Tên áo thun</label>
                 <input type="text" id="ten" class="form-control">
               </div>
+              <div class="form-group">
+                <label for="inputName">Mã sản phẩm</label>
+                <input type="text" id="masanpham" class="form-control">
+              </div>
               <div class="mb-3">
                 <label for="formFileMultiple" class="form-label">Chọn hình ảnh</label>
                 <input class="form-control" type="file" id="formFileMultiple" multiple>
@@ -340,7 +344,7 @@
               
               <div class="form-group">
                 <label for="inputProjectLeader">Màu sắc</label>
-                <input type="text" id="mausac" class="form-control">
+                <input type="color" id="mausac" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputProjectLeader">Đơn giá (vnđ)</label>
@@ -418,6 +422,7 @@
     
     $("#luu").click(function(){
       var ten = $("#ten").val();
+      var masanpham = $('#masanpham').val()
       var mota = $("#mota").val();
       var thuonghieu = $("#thuonghieu").val();
       //var size = $("#size").val();
@@ -469,6 +474,7 @@
       console.log(imgurl)
       var data = new FormData();
       data.append("ten",ten)
+      data.append("masanpham",masanpham)
       data.append("mota",mota)
       data.append("thuonghieu",thuonghieu)
       data.append("size",size)

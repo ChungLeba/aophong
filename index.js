@@ -9,9 +9,10 @@ var customerRouter = require('./routers/customer.js');
 var indexRouter = require('./routers/index.js');
 const cartRouter = require('./routers/cart')
 const orderRouter = require('./routers/order')
+const userRouter = require('./routers/user')
 const aothunRouter = require('./routers/aothun')
 //STATIC FOLDER
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, './public')));
 app.use(express.static(path.join(__dirname, 'views')));
 
 app.use(express.urlencoded({ extended: false }))
@@ -46,6 +47,8 @@ app.use('/', indexRouter)
 app.use('/cart', cartRouter)
 app.use('/order', orderRouter)
 app.use('/aothun', aothunRouter)
+app.use('/user', userRouter)
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
@@ -54,7 +57,16 @@ app.listen(port, () => {
 app.get('/home',function(req,res){
   res.sendFile(path.join(__dirname,"./Home_page/Home_page.html"));
 })
+app.get('/Gio_Hang',function(req,res){
+  res.sendFile(path.join(__dirname,"./Cart_page/Cart_page.html"));
+})
+app.get('/login',function(req,res){
+  res.sendFile(path.join(__dirname,"./Home_page/Login.html"));
+})
+app.get('/logon',function(req,res){
+  res.render("./adminlte/pages/3.use/1.reg.html",{mes:""})
+})
+//http://localhost:3000/Gio_Hang
 app.get('/detail/:code',function(req,res){
   res.sendFile(path.join(__dirname,"./Detail_page/Detail_page.html"));
 })
-app.use('/public',express.static(path.join(__dirname,"./public")))

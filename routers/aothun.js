@@ -45,10 +45,9 @@ router.get('/', (req, res) => {
     })
 })
 router.get("/code/:code",(req,res)=>{
-    console.log(73,req.params);
     aothunModel.find({masanpham:req.params.code})
      .then(function(data){
-         console.log(51,data); 
+        //  console.log(51,data); 
          res.json(data);
 
      })
@@ -60,5 +59,22 @@ router.get("/code/:code",(req,res)=>{
      
  })
 
+ router.get("/find/:code",(req,res)=>{
+    aothunModel.findOne({
+        masanpham:req.params.code, 
+        size:req.query.size,
+        mausac:'#'+req.query.color
+    })
+     .then(function(data){
+         res.json(data);
+
+     })
+     .catch(function(err){
+        console.log(err);
+         res.json(err);
+         
+     })
+     
+ })
  //localhost:3000/aothun/luucode?k=1&codel=code
 module.exports = router

@@ -134,6 +134,39 @@ body {
      border-radius: 5px;
      
  }
+ .relat5 {
+    position: relative;
+}
+.subMenu5 {
+    position: absolute;
+    list-style: none;
+    background-color:white;
+    left:-150px;
+    top: 100%;
+    width: 200px;
+    display: none;
+    padding: 0;   
+    border-radius: 5px;
+}
+.relat5:hover .subMenu5{
+    display: block;
+    background-color: white;
+    color:black;
+}
+.subMenu5:hover {
+  display: block;
+}
+.subMenu5 li{
+    padding: 8px 16px;
+
+ }
+.subMenu5 li:hover{
+     background-color: rgb(218, 116, 116);
+     color: white;
+     cursor: pointer;/*chuot*/
+     border-radius: 5px;
+     
+ }
 .logo{
     padding: 23px 0px;
    

@@ -8,24 +8,23 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../../adminlte/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../../../adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../../adminlte/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+      <a href="/" class="h1"><b>AOTHUN</b>SHOP</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Register a new membership</p>
+      <p class="login-box-msg">Đăng ký tài khoản mới</p>
 
-      <form action="../../index.html" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Full name">
+          <input type="text" class="form-control" placeholder="Full name" id="fullname">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -33,7 +32,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" id="email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -41,7 +40,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" id="pass1">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -49,7 +48,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input type="password" class="form-control" placeholder="Retype password" id="pass2"> 
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -60,31 +59,21 @@
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
-              </label>
+              <!-- <label for="agreeTerms">
+               Tôi đồng ý với <a href="#">các điều khoản</a>
+              </label> -->
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button class="btn btn-primary btn-block" id="dangky">Register</button>
           </div>
           <!-- /.col -->
         </div>
-      </form>
 
-      <div class="social-auth-links text-center">
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i>
-          Sign up using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
-          Sign up using Google+
-        </a>
-      </div>
+      
 
-      <a href="login.html" class="text-center">I already have a membership</a>
+      <a href="#" class="text-center">Tôi đã có tài khoản</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
@@ -92,10 +81,75 @@
 <!-- /.register-box -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../../../adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../../adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../../adminlte/dist/js/adminlte.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('#dangky').click(function(){
+      console.log(window.location.href.includes('/c/dangky'));
+      console.log(window.location.href.includes('/c/dangky'));
+      var fullname = $("#fullname").val()
+      var email = $('#email').val()
+      var pass1 = $('#pass1').val()
+      var pass2 = $('#pass2').val()
+      var phanquyen = 3
+      var sodienthoai =''
+      var diachi =''
+        if(fullname == ""){
+          alert("Thiếu tên của bạn")
+        } else if(email== ""){
+          alert("Thiếu email của bạn")
+        } else if(pass1=="" || pass2==""){
+          alert("Mật khẩu còn trống")
+        } else if(pass1!==pass2){
+          alert("Mật khẩu không trùng khớp")
+        } else{
+            console.log("tt:" + fullname, email, pass1, pass2)
+            if(window.location.href.includes('/c/dangky')){
+              $.ajax({
+                url:'/admin/themnguoidung',
+                type:'POST',
+                dataType: 'json',
+                data: {
+                        hoten: fullname,
+                        email: email,
+                        matkhau: pass2,
+                        phanquyen: phanquyen,
+                        sodienthoai: sodienthoai,
+                        diachi:diachi
+                    },
+                success: function(res){
+                    console.log(res)
+                    if(res.err){
+                      alert(res.err)
+                    } else {
+                      alert("Tài khoản: "+res.name+" đã được đăng ký")
+                      window.location.href = "/c/khachhang";
+                    }
+                }
+              })
+            }else{
+              $.ajax({
+                url:'/user',
+                type:'POST',
+                data:{
+                  email: email,
+                  password: pass1,
+                  hoten: fullname
+                }
+              }).then(data=>{
+                console.log(data);
+              }).catch(err=>{
+                console.log(err);
+              })
+            }
+          }
+        
+    })
+  })
+</script>
 </body>
 </html>

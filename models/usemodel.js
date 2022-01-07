@@ -12,7 +12,8 @@ var useSchema = mongoose.Schema({
     sodienthoai: String,
     diachi: String,
     hash: String,
-    salt: String
+    salt: String,
+    lasttoken: String
     },{collection : 'uses'})
 
 // định nghĩa lại định dạng user trả về ở response, không nên để password

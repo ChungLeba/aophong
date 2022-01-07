@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="/public/Detail_page.css">
 </head>
 <body>
+    <style class="CSSSS">
+       .colorItem0{
+        border: solid 1px #e4393c;}
+        
+    </style>
+    <style class="CSSS">
+        .colorsize0{
+         border: solid 1px #e4393c;}
+         
+     </style>
 <div class="body">
     <div class="header">
         <div class="header2">
@@ -78,9 +88,13 @@
                 <img class="icon" src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/search.svg?1640080382585" alt="Tìm kiếm" width="24">
                 
             </div>
-            <div title="Tài Khoản" class="cart-link">
-                <img class="icon" src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/user.svg?1640080382585" alt="Tài Khoản" width="24">
-               
+            <div title="Tài Khoản" class="cart-link relat5">
+                <img class="icon relat55" src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/user.svg?1640080382585" alt="Tài Khoản" width="24">
+                <ul class="subMenu5">
+                    <li onclick="dangnhap()">Đăng Nhập</li>
+                    <li onclick="taotaikhoan()">Tạo Tài Khoản</li>
+                   
+                </ul>  
             </div>
             <div title="Giỏ hàng" class="cart-link">
                 <img  src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/shopping-cart.svg?1640080382585" alt="Giỏ hàng" width="24">
@@ -94,8 +108,19 @@
 
     <div class="main">
         <div class="column1">
-            <div class="img"></div>
-            <div class="page"></div>
+            <div class="imggg"></div>
+            <div class="page">
+                <div class="page1">
+
+                </div>
+                <button class="back1">
+                    <i  class="fas fa-angle-double-left l123"></i>
+                </button>
+                <button class="next1">
+                    <i  class="fas fa-angle-double-right l123"></i>
+                </button>
+            </div>
+
         </div>
         <div class="column2">
             <h1 class="name">
@@ -105,7 +130,7 @@
                 <span class="a_name">Artist:</span>
             </div>
             <div class="gia">
-                <h2 style="color: #b5603f; font-size: 35px;font-weight: bold;">339.00đ</h2>
+                <h2 style="color: #b5603f; font-size: 35px;font-weight: bold;" class="giasp">339.00đ</h2>
             </div>
             <div class="color">
                 <div >Color</div> 
@@ -114,6 +139,7 @@
             <div class="size">
                 <div >Size</div> 
                 <div class="listsize"></div>
+               
             </div>
             <div class="buy">
                 <div class="soluong">
@@ -121,14 +147,14 @@
                 <input class="number" type="number">
                 </div>
                 <div class="click">
-                   <button class="them">THÊM VÀO GIỎ</button>
+                   <button onclick="them()" class="them">THÊM VÀO GIỎ</button>
                    <BUtton class="mua">MUA NGAY</BUtton>
                </div>
               
-
+               
             </div>
             <div class="mota">
-                <p style="font-weight: bold; font-size:20px ;">Mô tả sản phẩm</p>
+                <p style="font-weight: bold; font-size:20px ;" class="motasp">Mô tả sản phẩm</p>
              <div class="rte" >
                  <ul>
                  <li>Chất liệu nỉ.</li>

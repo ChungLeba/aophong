@@ -6,6 +6,7 @@ const blackListModel= require('../models/blackListmodel')
 
 async function checkLogin(req, res, next) {
     try {
+      
       const token = req.cookies.userToken
       if(token) {
         var check = await blackListModel.findOne({ token: token })
