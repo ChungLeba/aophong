@@ -1,4 +1,4 @@
-require('dotenv').config()
+/* require('dotenv').config()
 var jwt = require('jsonwebtoken');
 
 var token = jwt.sign({foo: 'bar' }, process.env.LOGINJWT, {expiresIn: "1h"});
@@ -12,9 +12,15 @@ jwt.verify(token, 'process.env.LOGINJWT', function(err, data){
     } else {
         //console.log("data: ",data)
     }
-})
-
-
+}) */
+ var a = {
+     a:1,
+     b:2
+}
+console.log(a)
+a.c = 3
+a = a.c
+console.log(a)
 
 /* console.log(process.env.DB_USERNAME, process.env.DB_PWD)
 console.log('Port sử dụng là ' + process.env.PORT) */

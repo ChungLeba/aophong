@@ -107,7 +107,7 @@
         } else{
             console.log("tt:" + fullname, email, pass1, pass2)
             $.ajax({
-              url:'/admin/themnguoidung',
+              url:'/c/dangky',
               type:'POST',
               dataType: 'json',
               data: {
@@ -124,7 +124,7 @@
                     alert(res.err)
                   } else {
                     alert("Tài khoản: "+res.name+" đã được đăng ký")
-                    window.location.href = "/c/khachhang";
+                    window.location.href = "/admin/";
                   }
                   
               }

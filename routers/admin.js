@@ -45,12 +45,13 @@ var checklogin = function(req,res,next){
 }
 //Kiểm tra quyền hạn
 
-//NHAN VIEN & ADMIN
+//NHAN VIEN & QUAN LY
 var checkpermisVNQL = function(req,res,next){
     if (req.permis===1 || req.permis===2 ){
+        req = req.permis
         return next()
     } else{
-        res.redirect("/c/khachhang")
+        res.redirect("/c/ttkhachhang")
     }
 }
 //QUAN LY
@@ -155,10 +156,29 @@ router.get('/logout', function(req,res,next){
 
 //1.TRUNG TAM QUAN LY
 router.get('/quanly',checklogin,checkpermisVNQL,
-    function(req,res,next){   
-    //res.send("Trang tổng quan")
-    //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
-    res.render("./adminlte/index.html",{admin:"Administrator"})
+    function(req,res,next){
+        console.log("quyen:"+ req.permis)
+        if(req.permis===1){
+            var quyen = "Quản lý"
+        } else if(req.permis===2){
+            quyen = "Nhân viên"
+        }
+        //
+        let token = req.cookies.token
+        let decoded  =  jwt.verify(token, process.env.LOGINJWT)
+        console.log(decoded.id)
+        useModel.findById({_id:decoded.id})
+        .then(data=>{
+            console.log(data)
+            res.render("./adminlte/index.html",{name:data.hoten, quyen:quyen})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        //res.send("Trang tổng quan")
+        //res.sendFile(path.join(__dirname, '../views/adminlte/index.html'))
+        
+        
 })
 //2.SAN PHAM
 //2.1 QUAN LY SAN PHAM
