@@ -12,9 +12,9 @@ router.get('/register', (req, res) => {
 router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/login.html'))
   })
-  router.get('/home', checkLogin, async (req, res) => {
-    res.send()
-    });
+// router.get('/home', checkLogin, async (req, res) => {
+//     res.send()
+//     });
 
 
 

@@ -24,7 +24,7 @@ router.get('/dangky', function(req,res,next){
     res.render("./adminlte/pages/3.use/1.reg.html",{mes:""})
 })
 
-router.post('/dangky', function(req,res,next){
+router.post('/dangky', async function(req,res,next){
     try {
           user = new useModel({ email: req.body.email, matkhau: req.body.matkhau })
          await user.save()

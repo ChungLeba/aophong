@@ -8,7 +8,8 @@ router.post('/add-to-cart/:id', checkLogin , async(req, res) => {
     try {
 //req.body là object gồm aothunID và soluong, gia
         const id = req.user._id.toString()
-        const cart = await giohangModel.findOne({ khachhangID: id})
+        console.log(req.params.id);
+        const cart = await giohangModel.findOne({ khachhangID: req.params.id})
         console.log(12, cart);
 // thêm sp vào trường donhang của bảng giohang và cập nhật tổng tiền;  xem chi tiết function trong model
         const item = await cart.addItem(req.body)    

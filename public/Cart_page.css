@@ -314,7 +314,7 @@ a {
 }
 .tablE{
     width: 1530px;
-  
+    font-family: "Roboto",sans-serif;
     padding-right: 10px;
     padding-left: 10px;
     margin-right: auto;
@@ -326,6 +326,7 @@ a {
     border-left: solid 1px#cccccc;
 }
 .ngang{
+    
     border-top: solid 1px#cccccc;
     border-bottom: solid 1px#cccccc;
 }
@@ -337,5 +338,162 @@ a {
     border-right: solid 1px#cccccc;
     text-align: center;
 }
+.imgsphd{
+    width: 274px;
+    padding: 10px 0;
+   
+    font-size: 14px;
+}
+.imgsp{
+   padding: 10px 20px;
+   height: 160px;
+    
+}
+.imgsp img{
+    width: 98px;
+    margin: 0 73px;
+}
+.tensphd{
+    width: 488px;
+    padding: 10px 0;
+    
+    font-size: 14px;
+}
+.trangthai {
+   margin-top: 5px;
+}
+.trangthai a{
+    color: #686868;
+}
+.dongiasphd{
+    width: 258px;
+    padding: 10px 0;
+    
+    font-size: 14px;
+}
+.dongiasp{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 7;
+    color: #a74939;
+}
+.slsphd{
+    width: 213px;
+    padding: 10px 0;
+    font-size: 14px;
+
+}
+
+.sl{
+    display: flex;
+    justify-content: center;
+}
+.trusl{
+ border: 1px solid #ebebeb ;
+ background-color: white;
+ height: 28px;
+ width: 28px;
+ margin: 0 5px;
+}
+.congsl{
+    border: 1px solid #ebebeb ;
+    background-color: white;
+    height: 28px;
+    width: 28px;
+    margin: 0 5px;
+}
+.solongbentrong{
+    width: 73px;
+    border: 1px solid #ebebeb ;
+    text-align: center;
+    height: 28px;
+    margin: 0 5px;
+    
+}
+.thanhtiensphd{
+    width: 213px;
+    padding: 10px 0;
+    
+    font-size: 14px;
+    
+}
+.thanhtiensp{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 7;
+    color: #a74939;
+}
+.xoasphd{
+    width: 74px;
+    padding: 10px 0;
+    font-size: 14px;
+}
+.thanhtienttt{
+    font-size: 14px;
+    font-weight: 700;
+    color: #a74939; 
+    padding: 10px 15px;
+}
+.cuoibang{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.ttmuh{
+    width: 58%;
+    
+}
+.ttmuh button{
+    height: 40px;
+    line-height: 40px;
+    
+    height: 38px;
+    background: #f2f2f2;
+    border: solid 1px#f2f2f2;
+    display: inline-block;
+    font-size: 14px;
+    padding: 0 25px;
+    font-weight: 700;
+    border-radius: 0px;
+}
+.ttmuh button:hover{
+    color: #FFF;
+    background-color: #a74939;
+    cursor: pointer;
+}
+.thtt{
+    width: 42%;
+}
+.thtt button{
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 45px;
+    color: #FFF;
+    background-color: #a74939;
+    border: solid 1px#a74939;
+    width: 100%;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0px;
   
+    height: 45px;
+}
+.thtt button:hover{
+    cursor: pointer;
+    background-color: #8f4639;
+}
+.ttttbt{
+    display: flex;
+    border:solid 1px#cccccc; 
+    
+}
+.contentt{
+    padding: 10px 15px;
+    
+    width: 53%;
+    border-right: solid 1px#cccccc;
+   
+
+}
  

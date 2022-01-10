@@ -67,3 +67,6 @@ giohangSchema.methods.removeItem = async function(aothunID) {
 
 const giohangModel = mongoose.model('giohangModel', giohangSchema)
 module.exports = giohangModel
+// giohangModel.find()
+// .then(data=>{console.log(data);})
+// .catch(err=>{console.log(err);})

@@ -55,10 +55,14 @@ app.listen(port, () => {
 })
 
 app.get('/home',function(req,res){
+  console.log(10000);
   res.sendFile(path.join(__dirname,"./Home_page/Home_page.html"));
 })
 app.get('/Gio_Hang',function(req,res){
   res.sendFile(path.join(__dirname,"./Cart_page/Cart_page.html"));
+})
+app.get('/Thanh_toan',function(req,res){
+  res.sendFile(path.join(__dirname,"./Home_page/Payment_page.html"));
 })
 app.get('/login',function(req,res){
   res.sendFile(path.join(__dirname,"./Home_page/Login.html"));

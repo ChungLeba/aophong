@@ -1,0 +1,120 @@
+.BODY{
+    width: 1330px;
+    display: flex;
+    font-family: Helvetica Neue,sans-serif;
+    line-height: 1.42857143em;
+    margin: auto;
+}
+.cot1{
+    width: 65%;
+    padding: 0px 28px;
+    padding-top: 28px;
+   
+    border-right: 1px #d9d9d9 solid; 
+}
+.cot2{
+    width: 35%;
+    background: #fafafa;
+}
+.noidung{
+    width: 100%;
+    display: flex;
+    
+}
+.thongtin{
+    width: 50%;
+    
+}
+.tieude{
+    width: 100%;
+    padding-bottom: 21px;
+}
+.ttmuahang{
+    width: 100%;
+    justify-content: space-between;
+}
+.ttmuahang p{
+    color: #333;
+    font-weight: 600;
+    font-size: 1.15rem;
+    
+}
+.vanchuyen{
+    color: #333;
+    font-weight: 600;
+    font-size: 1.15rem;
+}
+.thongtinkhachhang{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+.thongtinkhachhang input{
+    width: 100%;
+    border-radius: 4px;
+    
+    display: block;
+    box-sizing: border-box;
+    padding: 0.94em 0.8em;
+    border: 1px #d9d9d9 solid;
+    height: 44px;
+    background-color: #fff;
+    color: #333;
+    margin: 5px 0;
+}
+.thongtinkhachhang select{
+    width: 100%;
+    margin: 5px 0;
+    color: #333;
+    font-size: 14px;
+    
+    border-radius: 4px;
+    
+    display: block;
+    box-sizing: border-box;
+    padding: 0.94em 0.8em;
+    border: 1px #d9d9d9 solid;
+    height: 44px;
+    background-color: #fff;
+   
+}
+.thanhtoan{
+    width:50%;
+    padding-left: 28px;
+    padding-right: 14px;
+}
+.thanhttoan{
+    margin-top: 28px;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.15rem;
+}
+.vanchuyenbt{
+    display: flex;
+    padding: 14px;
+    border: 1px #d9d9d9 solid;
+    border-radius: 4px;
+    justify-content: space-between;
+
+}
+.hinhthuc{
+    padding: 14px;
+    border: 1px #d9d9d9 solid;
+    border-radius: 4px;
+}
+.ghichu{
+    padding: 14px;
+    background-color: #d9d9d9;
+    border: 1px #d9d9d9 solid;
+    border-radius: 4px;
+}
+.chinhsach{
+    border-top:1px #d9d9d9 solid;
+    font-size: 14px;
+    width: 200%;
+    text-align: right;
+}
+.csht{
+    margin-top: 15px;
+    margin-right: 50px;
+}

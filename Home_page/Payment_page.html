@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/public/Payment_page.css">
+</head>
+
+<body>
+<div class="BODY">
+    <div class="cot1">
+        <div class="tieude">
+            <img src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/logo.png?1641377198832" alt="">
+        </div>
+        <div class="noidung">
+            <div class="thongtin">
+                <div class="ttmuahang" style="display: flex;">
+                    <p>Thông tin mua hàng</p>
+                    <a>Đăng nhập</a>
+                </div>
+                <div class="thongtinkhachhang">
+                    <input class="email" type="text" placeholder="Email">
+                    <input class="ten" type="text" placeholder="Họ và tên">
+                    <input class="sdt" type="text" placeholder="Số điện thoại">
+                    <input class="diachi" type="text" placeholder="Địa chỉ">
+                    <select name="calc_shipping_provinces" required="">
+                        <option class="tinh" value="">Tỉnh / Thành phố</option>
+                      </select>
+                      <select name="calc_shipping_district" required="">
+                        <option class="quanhuyen" value="">Quận / Huyện</option>
+                      </select>
+                      <input class="billing_address_1" name="" type="hidden" value="">
+                      <input class="billing_address_2" name="" type="hidden" value="">                    <input class="phuongxa" type="text" placeholder="Phường xã">
+                    <input class="ghichu" type="text" placeholder="Ghi chú(tùy chọn)">
+
+                </div>
+                 <div class="chinhsach">
+                     <p class="csht">Chính sách hoàn trả</p>
+                     <p>NHẬP MÃ COUPON NHẬN NGAY ƯU ĐÃI VỚI CHƯƠNG TRÌNH THẺ THÀNH VIÊN: 
+                        Hạng Citizen: nhập mã "tiredcitizen" discount 5% - Hạng 1: nhập mã "tiredcitizen01" discount 20% - Hạng 2: nhập mã "tiredcitizen02" discount 15% - Hạng 3: nhập mã "tiredcitizen03" discount 10%
+                    </p>
+                 </div>
+            </div>
+            <div class="thanhtoan">
+                <div class="vanchuyen">
+                    <p>Vận chuyển</p>
+                </div>
+                <div class="vanchuyenbt" >
+                   <a >Nội địa freeship</a> 
+                   <a >Miễn phí</a> 
+                </div>
+                <div class="thanhttoan">
+                    <p>Thanh Toán</p>
+                </div>
+                <div class="hinhthuc" >
+                    Thanh toán khi nhận hàng
+                 </div>
+                 <div class="ghichu">
+                    Hãy thanh toán khi nhận hàng
+                 </div>
+
+            </div>
+        </div>
+       
+    </div>
+    <div class="cot2"></div>
+</div>
+   
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
+integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" 
+crossorigin="anonymous" 
+referrerpolicy="no-referrer"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<script src="/public/Payment_page.js"></script>
+</html>
