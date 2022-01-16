@@ -133,12 +133,15 @@
               })
             }else{
               $.ajax({
-                url:'/user',
+                url:'/c',
                 type:'POST',
                 data:{
                   email: email,
-                  password: pass1,
-                  hoten: fullname
+                  matkhau: pass1,
+                  hoten: fullname,
+                  phanquyen: 3,
+                  sodienthoai: sodienthoai,
+                  diachi:diachi
                 }
               }).then(data=>{
                 console.log(data);

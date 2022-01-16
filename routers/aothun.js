@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path')
-const aothunModel = require('../models/aothunmodel')
 const checkLogin = require('../middlewares/checkLogin')
+const aothunModel = require('../models/aothunmodel')
+
 
 router.get('/:id', async(req, res) => {
     try {
@@ -13,7 +14,7 @@ router.get('/:id', async(req, res) => {
     }
 })
 // có thể phân trang 20 sp/trang và lọc theo giá
-/*router.get('/', (req, res) => {
+router.get('/', (req, res) => {
         let { min, max, page } = req.query
         const PAGE_SIZE = 20
         const pageNumber = (!page) ? 1: parseInt(page)
@@ -32,18 +33,8 @@ router.get('/:id', async(req, res) => {
             .catch(error => {
                 res.status(500).send(error)
             })
-})*/
-router.get('/', (req, res) => {
-    aothunModel.find()
-    .then( items => {
-        console.log(items);
-        res.status(201).send(items)
-
-    })
-    .catch(error => {
-        res.status(500).send(error)
-    })
 })
+
 router.get("/code/:code",(req,res)=>{
     aothunModel.find({masanpham:req.params.code})
      .then(function(data){
@@ -76,5 +67,4 @@ router.get("/code/:code",(req,res)=>{
      })
      
  })
- //localhost:3000/aothun/luucode?k=1&codel=code
 module.exports = router

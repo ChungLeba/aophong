@@ -1,14 +1,16 @@
 async function login (){
     const email = $('#email').val()
-    const password = $('#password').val()
+    const matkhau = $('#password').val()
+    console.log(email,matkhau );
     try {
         const data = await $.ajax({
-            url:'/user/login',
+            url:'/c/login',
             type:'POST',
-            data:{email, password}
+            data:{email, matkhau}
         })
+        console.log(data);
         if(data.status === 200){
-            setCookie('userToken', data.token, 7)
+            setCookie('userToken', data.userToken, 7)
             window.location.href = '/home'
         }
     } catch (error) {

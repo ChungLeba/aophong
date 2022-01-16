@@ -361,9 +361,10 @@ a {
 }
 .trangthai {
    margin-top: 5px;
-}
-.trangthai a{
+   justify-content: center;}
+.trangthai div{
     color: #686868;
+    margin: 0 5px;
 }
 .dongiasphd{
     width: 258px;

@@ -15,16 +15,19 @@ router.post('/order/add', checkLogin, async(req, res) => {
         fields.forEach(field => {
             return data[field] = req.body[field]
         })
-        const order = await donhangModel.create(data)
-//xóa hàng hóa đã bán trong bảng item
-        data.list.forEach(async(item)=> {
-        await  aothunModel.findByIdAndUpdate(item.aothunID, { $inc: { soluong: -item.soluong } })
-        })
+        data.khachhangID = _id
     
 // xóa dữ liệu trường list trong bảng cart
-        await giohangModel.findOneAndUpdate({ khachhangID: _id }, { donhang: [], tongtien: 0 })
+        const gioHang = await giohangModel.findOneAndUpdate({ khachhangID: _id }, { donhang: [], tongtien: 0 })
+        data.donhang = gioHang.donhang
+        const order = await donhangModel.create(data)
+// xóa hàng hóa đã bán trong bảng item
+        gioHang.donhang.forEach(async(item)=> {
+        await  aothunModel.findByIdAndUpdate(item.aothunID, { $inc: { soluong: -item.soluong } })
+        })
         res.send(order)
     } catch (error) {
+        console.log(error);
         res.send(error)
     }
 })

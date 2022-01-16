@@ -1,5 +1,5 @@
 const express = require('express')
-
+require('dotenv').config()
 const path =require("path");
 const app = express()
 const port = 3000
@@ -9,7 +9,7 @@ var customerRouter = require('./routers/customer.js');
 var indexRouter = require('./routers/index.js');
 const cartRouter = require('./routers/cart')
 const orderRouter = require('./routers/order')
-const userRouter = require('./routers/user')
+// const userRouter = require('./routers/user')
 const aothunRouter = require('./routers/aothun')
 //STATIC FOLDER
 app.use('/public', express.static(path.join(__dirname, './public')));
@@ -47,7 +47,7 @@ app.use('/', indexRouter)
 app.use('/cart', cartRouter)
 app.use('/order', orderRouter)
 app.use('/aothun', aothunRouter)
-app.use('/user', userRouter)
+// app.use('/user', userRouter)
 
 
 app.listen(port, () => {
@@ -55,7 +55,6 @@ app.listen(port, () => {
 })
 
 app.get('/home',function(req,res){
-  console.log(10000);
   res.sendFile(path.join(__dirname,"./Home_page/Home_page.html"));
 })
 app.get('/Gio_Hang',function(req,res){

@@ -13,7 +13,7 @@
 <body>
 <div class="BODY">
     <div class="cot1">
-        <div class="tieude">
+        <div onclick="quaylaihome()" class="tieude">
             <img src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/logo.png?1641377198832" alt="">
         </div>
         <div class="noidung">
@@ -34,7 +34,8 @@
                         <option class="quanhuyen" value="">Quận / Huyện</option>
                       </select>
                       <input class="billing_address_1" name="" type="hidden" value="">
-                      <input class="billing_address_2" name="" type="hidden" value="">                    <input class="phuongxa" type="text" placeholder="Phường xã">
+                      <input class="billing_address_2" name="" type="hidden" value="">                    
+                      <input class="phuongxa" type="text" placeholder="Phường xã">
                     <input class="ghichu" type="text" placeholder="Ghi chú(tùy chọn)">
 
                 </div>
@@ -67,7 +68,57 @@
         </div>
        
     </div>
-    <div class="cot2"></div>
+    <div class="cot2">
+        <div class="donhang">Đơn hàng</div>
+        <div class="noidungdonhang">
+            <div class="dsdonhang">
+                <table id="donhangthanhtoan" class="bang " style="border-collapse: collapse ">
+                        <tr class="ngang">
+                            <th class="tensphd">Tên sản phẩm</th>
+                            <th class="dongiasphd">Đơn giá</th>
+                            <th class="slsphd">Số lượng</th>
+                            <th class="thanhtiensphd">Thành tiền</th>
+                           
+                        </tr>
+ 
+                    </table>
+            </div>
+
+                    
+            
+            <div class="sotienthanhtoan">
+                <tbody >
+                    <div class="tamtinh">
+                        <div>Tạm tính</div>
+                        <div class="tongcongso">35.518.000₫</div>
+                    </div>
+                    
+                    <div class="shipping">
+                        <div> Phí vận chuyển</div>                          
+                       <div>Miễn phí</div>
+                      
+                    </div>
+                    
+                </tbody>
+            </div>
+            <div class="dathangthanhtoan">
+                <tbody >
+                    <div class="tongcong">
+                        <div class="tongcongtext">Tổng cộng</div>
+                        <div class="tongcongso">35.518.000₫</div>
+                    </div>
+                    
+                    <div class="quayve">
+                        <div onclick="quayvegiohang()" class="qvgiohang"> Quay về giỏ hàng</div>                          
+                       <button class="buttomdathang" onclick='order()'>ĐẶT HÀNG</button>
+                      
+                      
+                    </div>
+                    <div class="contennnn" style="color: red; text-align: center; width: 100%;padding-top: 10px;"></div>
+                </tbody>
+            </div>
+        </div>
+    </div>
 </div>
    
 </body>

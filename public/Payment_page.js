@@ -1,70 +1,82 @@
 
 
-if (address_2 = localStorage.getItem('address_2_saved')) {
-  $('select[name="calc_shipping_district"] option').each(function() {
-    if ($(this).text() == address_2) {
-      $(this).attr('selected', '')
-    }
-  })
-  $('input.billing_address_2').attr('value', address_2)
-}
-if (district = localStorage.getItem('district')) {
-  $('select[name="calc_shipping_district"]').html(district)
-  $('select[name="calc_shipping_district"]').on('change', function() {
-    var target = $(this).children('option:selected')
-    target.attr('selected', '')
-    $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
-    address_2 = target.text()
-    $('input.billing_address_2').attr('value', address_2)
-    district = $('select[name="calc_shipping_district"]').html()
-    localStorage.setItem('district', district)
-    localStorage.setItem('address_2_saved', address_2)
-  })
-}
-$('select[name="calc_shipping_provinces"]').each(function() {
-  var $this = $(this),
-    stc = ''
-  c.forEach(function(i, e) {
-    e += +1
-    stc += '<option value=' + e + '>' + i + '</option>'
-    $this.html('<option value="">Tỉnh / Thành phố</option>' + stc)
-    if (address_1 = localStorage.getItem('address_1_saved')) {
-      $('select[name="calc_shipping_provinces"] option').each(function() {
-        if ($(this).text() == address_1) {
-          $(this).attr('selected', '')
-        }
-      })
-      $('input.billing_address_1').attr('value', address_1)
-    }
-    $this.on('change', function(i) {
-      i = $this.children('option:selected').index() - 1
-      var str = '',
-        r = $this.val()
-      if (r != '') {
-        arr[i].forEach(function(el) {
-          str += '<option value="' + el + '">' + el + '</option>'
-          $('select[name="calc_shipping_district"]').html('<option value="">Quận / Huyện</option>' + str)
-        })
-        var address_1 = $this.children('option:selected').text()
-        var district = $('select[name="calc_shipping_district"]').html()
-        localStorage.setItem('address_1_saved', address_1)
-        localStorage.setItem('district', district)
-        $('select[name="calc_shipping_district"]').on('change', function() {
-          var target = $(this).children('option:selected')
-          target.attr('selected', '')
-          $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
-          var address_2 = target.text()
-          $('input.billing_address_2').attr('value', address_2)
-          district = $('select[name="calc_shipping_district"]').html()
-          localStorage.setItem('district', district)
-          localStorage.setItem('address_2_saved', address_2)
-        })
-      } else {
-        $('select[name="calc_shipping_district"]').html('<option value="">Quận / Huyện</option>')
-        district = $('select[name="calc_shipping_district"]').html()
-        localStorage.setItem('district', district)
-        localStorage.removeItem('address_1_saved', address_1)
-      }
+
+
+async function order(){
+  try {
+    // const email = $('.email').val()
+    const ten = $('.ten').val()
+    const sdt = $('.sdt').val()
+    const diachi = $('.diachi').val()
+     //console.log(11,email, ten, sdt, diachi);
+    if(ten!=''||sdt!=''||diachi!=''){
+       const res = await $.ajax({
+      url:'/order/order/add',
+      type:'POST',
+      data:{tennguoinhan: ten, sdtnguoinhan:sdt, diachinhanhang:diachi}
     })
+    console.log(85, res);
+    }else{
+     
+      let htmll=`<p> Thông tin khách hàng còn thiếu </p>`
+      $(".contennnn").html(htmll)
+      let time1=setTimeout(function(){
+        let htmlll=``
+        $(".contennnn").html(htmlll)
+        },3000);// 
+    
+    }
+
+     
+    
+   
+  } catch (error) {
+    console.log(30,error);
+   
+  }
+}
+var tienkhachhangptra=0;
+
+$.ajax({
+  url:'/cart/',
+  type:'GET'
+}).then(data=>{
+  console.log(28,data);
+  data.donhang.map((ele)=>{
+      console.log(ele);
+      const html = `
+      <tr class="ngang">
+          <td class="tensp">
+              <a class="tenspdt">${ele.aothunID.ten}</a><br>
+              <div class="trangthai" style="display: flex;">
+                  <div class="mausacdt" style='background: ${ele.aothunID.mausac}; width:30px; height:20px'></div>
+                  <div class="sizedt" style=' width:10px; '>${ele.aothunID.size}</div>
+              </div>              
+          </td>
+          <td class="dongiasp">${ele.aothunID.gia}</td>
+          <td lass="slsp">
+              <div class="sl">
+                    
+              <div class="thongso thongso${ele.aothunID._id}">
+                  <input  class="solongbentrong solongbentrong${ele.aothunID._id}" type="text" value="${ele.soluong}">                  
+              </div>             
+              </div>
+          </td>
+          <td class="thanhtiensp thanhtiensp${ele.aothunID._id}">${ele.aothunID.gia * ele.soluong}</td>
+      </tr>
+      `
+      
+      $("#donhangthanhtoan").append(html)
+     tienkhachhangptra+=ele.aothunID.gia * ele.soluong;
+
+     let abchtml=`${tienkhachhangptra}đ`
+     $(".tongcongso").html(abchtml)
+  
   })
-})
+}).catch(err=>{console.log(err);})
+function quayvegiohang() {
+  window.location.href='http://localhost:3000/Gio_Hang'
+}
+function quaylaihome() {
+  window.location.href='http://localhost:3000/home'
+}

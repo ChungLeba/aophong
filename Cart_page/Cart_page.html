@@ -14,7 +14,7 @@
     <div class="header">
         <div class="header2">
              <div class="container">
-            <div class="logo">
+            <div onclick="logo()" class="logo">
                 <img src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/logo.png?1640080382585" alt="TiredCity">
             </div>
             <div class="header-menu">
@@ -86,10 +86,7 @@
                    
                 </ul>  
             </div>
-            <div title="Giỏ hàng" class="cart-link">
-                <img  src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/shopping-cart.svg?1640080382585" alt="Giỏ hàng" width="24">
-                <i class="cartCount count_item_pr"></i>
-            </div>
+           
         </div>  
         </div>
                       
@@ -108,39 +105,11 @@
                     <th class="xoasphd">Xoá</th>
                 </tr>
                 
-                
-                <tr class="ngang">
-                    <td class="imgsp"><img src="https://bizweb.dktcdn.net/thumb/compact/100/396/591/products/than-small-18.jpg" alt=""></td>
-                    <td class="tensp">
-                        <a class="tenspdt">Than Small Ver - 12 Con Giap Sweater</a><br>
-                        <div class="trangthai">
-                            <a class="mausacdt">BLACK</a>/<a class="sizedt">S</a>
-                        </div>
-                        
-                    </td>
-                    <td class="dongiasp">349.000đ</td>
-                    <td lass="slsp">
-                        <div class="sl">
-                            <div>
-                            <button onclick="trsl()" class="trusl">-</button>
-                            </div>   
-                        <div class="thongso">
-                            <input  class="solongbentrong" type="text" value=1>
-                        </div>  
-                            <div>
-                             <button onclick="cgsl()" class="congsl">+</button>
-                           </div>              
-                       
-                        </div>
-                    </td>
-                    <td class="thanhtiensp">119</td>
-                    <td class="xoasp">
-                        <i class="fas fa-times"></i>
-                    </td>
-                </tr>
+               
+              
    
             </table>
-           <div class="cuoibang" >
+           <div class="cuoibang">
                <div class="ttmuh">
                 <button onclick="quaylaihome()">TIẾP TỤC MUA HÀNG</button>
                </div>
@@ -149,7 +118,7 @@
                        <div class="contentt">Tổng tiền thanh toán </div>
                        <div class="thanhtienttt">12345678đ</div>
                    </div>
-                   <button>TIẾN HÀNH THANH TOÁN</button>
+                   <button onclick="quatrangthanhtoan()">TIẾN HÀNH THANH TOÁN</button>
                </div>
            </div> 
            

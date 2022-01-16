@@ -6,11 +6,9 @@ const blackListModel= require('../models/blackListmodel')
 
 async function checkLogin(req, res, next) {
     try {
-      
       const token = req.cookies.userToken
       if(token) {
         var check = await blackListModel.findOne({ token: token })
-        
         // TH1: Có Token, nhưng đã bị xóa cho vào blackList
         if(check) {
            res.json('Token không hợp lệ')
@@ -18,7 +16,7 @@ async function checkLogin(req, res, next) {
 
         //TH2: Token hợp lệ, next()
         const decode = jwt.verify(req.cookies.userToken, process.env.KEY)
-        const user = await useModel.findOne({_id: decode.id})
+        const user = await useModel.findOne({_id: decode._id})
         if(user) {
           req.user = user
           return next()

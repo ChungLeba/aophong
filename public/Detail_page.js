@@ -16,6 +16,7 @@ $.ajax({
 
 })
   .then(data => {
+    console.log(data);
     for (let i = 0; i < data.length; i++) {
       let name = `${data[i].ten}`
       $(".name").html(name)
@@ -66,7 +67,12 @@ function CLI(a) {
   $(".CSSSS").html(bder)
 
 }
-
+function logo() {
+  window.location.href = 'http://localhost:3000/home'
+}
+function giohang() {
+  window.location.href = 'http://localhost:3000/Gio_Hang'
+}
 async function them() {
   try {
     dulieura3 = $(".number").val();
@@ -77,6 +83,13 @@ async function them() {
 
     })
     if (data) {
+      let htmll=`<p> Đã thêm vào giỏ hàng </p>`
+      $(".contennnn").html(htmll)
+      let time1=setTimeout(function(){
+        let htmlll=``
+        $(".contennnn").html(htmlll)
+        },3000);// 
+  
       console.log(84, data);
       const dt = await $.ajax({
         type: "POST",
@@ -91,14 +104,71 @@ async function them() {
         console.log(dt);
       }
       
-    } }
+    }
+    else{
+      let htmll1=`<p> Chưa chọn màu hoặc size </p>`
+      $(".contennnn").html(htmll1)
+      let time1=setTimeout(function(){
+        let htmlll2=``
+        $(".contennnn").html(htmlll2)
+    },3000);//
+    }
+   }
     catch (error) {
       console.log(error)
+
     }
 
 
   }
-
+  async function muahang() {
+    try {
+      dulieura3 = $(".number").val();
+     // console.log(dulieura3);
+      const data = await $.ajax({
+        type: "GET",
+        url: "/aothun/find/" + code + `?size=${size}&color=${color}`
+  
+      })
+      if (data) {
+        let htmll=`<p> Đã thêm vào giỏ hàng </p>`
+        $(".contennnn").html(htmll)
+        let time1=setTimeout(function(){
+          let htmlll=``
+          $(".contennnn").html(htmlll)
+          },3000);// 
+    
+        console.log(84, data);
+        const dt = await $.ajax({
+          type: "POST",
+          url: "/cart/add-to-cart/" + data._id,
+          data: {
+            aothunID: data._id,
+            gia: data.gia,
+            soluong: dulieura3
+          },
+        })
+        if (dt) {
+          window.location.href = 'http://localhost:3000/Thanh_toan'
+        }
+        
+      }
+      else{
+        let htmll1=`<p> Chưa chọn màu hoặc size </p>`
+        $(".contennnn").html(htmll1)
+        let time1=setTimeout(function(){
+          let htmlll2=``
+          $(".contennnn").html(htmlll2)
+      },3000);//
+      }
+     }
+      catch (error) {
+        console.log(error)
+  
+      }
+  
+  
+    }
 
 
 

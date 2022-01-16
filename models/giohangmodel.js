@@ -1,9 +1,12 @@
 const mongoose = require('./dbConnect');
-
+const aothunModel = require('./aothunmodel')
 const giohangSchema = mongoose.Schema({
     khachhangID: String,
     donhang: [{
-        aothunID: String, //bao gồm màu, kiểu, loại, size, giá
+        aothunID: {
+            type: String,
+            ref: 'aothuns'
+        }, //bao gồm màu, kiểu, loại, size, giá
         gia: Number,
         soluong: Number
     }],
@@ -14,52 +17,53 @@ const giohangSchema = mongoose.Schema({
 })
 giohangSchema.methods.addItem = async function (object) { //khi gọi hàm thì object chính là req.body
     const cart = this
-    const index = cart.list.findIndex(item => {
+    const index = cart.donhang.findIndex(item => {
         
         return item.aothunID == object.aothunID
     })
     //nếu tìm thấy
     if(index !== -1) {
-        cart.list[index].soluong += object.soluong
+        cart.donhang[index].soluong += object.soluong
     }else {
-        cart.list = cart.list.concat(object)
+        cart.donhang = cart.donhang.concat(object)
     }
-    cart.tongtien = cart.tongtien + object.gia*object.soluong
+    const tongTien = cart.tongtien ? cart.tongtien : 0
+    cart.tongtien = tongTien + object.gia*object.soluong
     await cart.save()
     return index
 }
 giohangSchema.methods.addByOne = async function(aothunID) { // aothunID chính là params :id
     const cart = this
-// đối tượng list là 1 mảng nên dùng vòng lặp
-   const addedItem = cart.list.find(item => {
+// đối tượng donhang là 1 mảng nên dùng vòng lặp
+   const addedItem = cart.donhang.find(item => {
         return item.aothunID = aothunID
     })
    const gia = addedItem.gia
     addedItem.soluong ++
     cart.tongtien += gia
     await cart.save()
-    return cart.list
+    return cart.donhang
 }
 giohangSchema.methods.reduceByOne = async function(aothunID) {
     const cart = this
-// đối tượng list là 1 mảng nên dùng vòng lặp
-   const reducedItem = cart.list.find(item => {
+// đối tượng donhang là 1 mảng nên dùng vòng lặp
+   const reducedItem = cart.donhang.find(item => {
         return item.aothunID = aothunID
     })
     const gia = reducedItem.gia
     reducedItem.soluong --
     cart.tongtien -= gia
     await cart.save()
-    return cart.list
+    return cart.donhang
 }
 giohangSchema.methods.removeItem = async function(aothunID) {
     const cart = this
-    const index = cart.list.findIndex(item => {
+    const index = cart.donhang.findIndex(item => {
         return item.aothunID == aothunID
     })
-    const gia = cart.list[index].gia
-    const soluong = cart.list[index].soluong
-   cart.list.splice(index, 1)
+    const gia = cart.donhang[index].gia
+    const soluong = cart.donhang[index].soluong
+   cart.donhang.splice(index, 1)
    cart.tongtien -= gia * soluong
    await cart.save()
    return cart
@@ -67,6 +71,4 @@ giohangSchema.methods.removeItem = async function(aothunID) {
 
 const giohangModel = mongoose.model('giohangModel', giohangSchema)
 module.exports = giohangModel
-// giohangModel.find()
-// .then(data=>{console.log(data);})
-// .catch(err=>{console.log(err);})
+

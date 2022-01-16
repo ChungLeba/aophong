@@ -24,7 +24,7 @@
     <div class="header">
         <div class="header2">
              <div class="container">
-            <div class="logo">
+            <div onclick="logo()" class="logo">
                 <img src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/logo.png?1640080382585" alt="TiredCity">
             </div>
             <div class="header-menu">
@@ -96,7 +96,7 @@
                    
                 </ul>  
             </div>
-            <div title="Giỏ hàng" class="cart-link">
+            <div onclick="giohang()" title="Giỏ hàng" class="cart-link">
                 <img  src="https://bizweb.dktcdn.net/100/396/591/themes/822056/assets/shopping-cart.svg?1640080382585" alt="Giỏ hàng" width="24">
                 <i class="cartCount count_item_pr"></i>
             </div>
@@ -146,9 +146,10 @@
                      <span >Số lượng:</span>
                 <input class="number" type="number">
                 </div>
+                <div style="color: red; text-align: center;" class="contennnn"></div>
                 <div class="click">
                    <button onclick="them()" class="them">THÊM VÀO GIỎ</button>
-                   <BUtton class="mua">MUA NGAY</BUtton>
+                   <BUtton onclick="muahang()" class="mua">MUA NGAY</BUtton>
                </div>
               
                

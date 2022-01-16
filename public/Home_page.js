@@ -1,16 +1,16 @@
 $('.next').on('click', function(){
-    // let move = 
-    $('.listData').animate({ "right": "+=1550px" }, "slow" )
-  })
+  // let move = 
+  $('.listData').animate({ "right": "+=1550px" }, "slow" )
+})
   
-  $('.back').on('click', function(){
-    // let move = 
-    $('.listData').animate({ "right": "-=1550" }, "slow" )
-  })
-  $.ajax({
-    type :"GET",
-    url:"/aothun"
-  
+$('.back').on('click', function(){
+  // let move = 
+  $('.listData').animate({ "right": "-=1550" }, "slow" )
+})
+
+$.ajax({
+  type :"GET",
+  url:"/aothun"
 })
 .then(function(data){
 console.log(17,data);
@@ -124,14 +124,14 @@ $.ajax({
   $(".subMenu5").html(SM5)
 }
 
-$.ajax({
-  url:'/user/check',
-  type:'POST'
-}).then((data)=>{
-  if(data.status === 200){
-    let SM5 =` <li onclick="dangxuat()">Đăng Xuất</li>`
-    $(".subMenu5").html(SM5)
-  }
-}).catch(err=>{
-  console.log(135, err);
-})
+// $.ajax({
+//   url:'/user/check',
+//   type:'POST'
+// }).then((data)=>{
+//   if(data.status === 200){
+//     let SM5 =` <li onclick="dangxuat()">Đăng Xuất</li>`
+//     $(".subMenu5").html(SM5)
+//   }
+// }).catch(err=>{
+//   console.log(135, err);
+// })

@@ -16,6 +16,106 @@
     width: 35%;
     background: #fafafa;
 }
+.donhang{
+    width: 100%;
+    border-bottom: 1px solid #e1e1e1;
+     padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 28px;
+      color: #333;
+      font-weight: 600;
+      font-size: 1.15rem;
+
+}
+.dsdonhang{
+    padding: 14px 0px;
+    width: 100%;
+    height: 150px;
+    overflow: auto;
+    
+}
+.dsdonhang div{
+    padding: 14px 0px;
+    width: 100%;
+   display: flex;
+   flex-direction: column;
+    width: 100%;
+    
+    
+}
+.noidungdonhang{
+    padding-left: 28px;
+    width: 100%;
+      
+    
+}
+#donhangthanhtoan
+{
+   width: 100%;
+}
+.sotienthanhtoan{
+    font-family: Helvetica Neue,sans-serif;
+    color: #717171;
+    padding: 14px 0px;
+    width: 100%;
+    border-top: 1px solid rgba(175,175,175,.34);
+    font-size: 14px;
+    border-bottom: 1px solid rgba(175,175,175,.34);
+}
+.tamtinh{
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: normal;
+}
+.shipping{
+    display: flex;
+    justify-content: space-between;
+    font-weight: normal;
+}
+.dathangthanhtoan{
+   
+   
+}
+.tongcong{
+    padding-top: 28px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tongcongtext{
+    color: #717171;
+    font-size: 1.0em;
+}
+.tongcongso{
+    color: #444444;
+    font-size: 1.3em;
+    font-weight: 500;
+    letter-spacing: -.04em;
+    line-height: 1em;
+}
+.quayve{
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.qvgiohang{
+    color: #444444;
+    font-size: 14px;
+}
+.buttomdathang{
+    background-color: #0c74c6;
+    border-color: #0c74c6;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    border: 1px transparent solid;
+    border-radius: 5px;
+    font-weight: 500;
+    padding: 0.90em 1.7em;
+}
 .noidung{
     width: 100%;
     display: flex;
@@ -117,4 +217,152 @@
 .csht{
     margin-top: 15px;
     margin-right: 50px;
+}
+.TABLe{
+    width: 100%;
+}
+.tensphd{
+    width: 100%;
+    padding: 10px 0;
+    
+    font-size: 14px;
+}
+.trangthai {
+    display: flex;
+   margin-top: 5px;
+   justify-content: center;}
+.trangthai div{
+    color: #686868;
+    margin: 0 5px;
+}
+.dongiasphd{
+    width: 258px;
+    padding: 10px 0;
+    
+    font-size: 14px;
+}
+.dongiasp{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 7;
+    color: #a74939;
+}
+.slsphd{
+    width: 213px;
+    padding: 10px 0;
+    font-size: 14px;
+
+}
+
+.sl{
+    display: flex;
+    justify-content: center;
+}
+.trusl{
+ border: 1px solid #ebebeb ;
+ background-color: white;
+ height: 28px;
+ width: 28px;
+ margin: 0 5px;
+}
+.congsl{
+    border: 1px solid #ebebeb ;
+    background-color: white;
+    height: 28px;
+    width: 28px;
+    margin: 0 5px;
+}
+.solongbentrong{
+    width: 73px;
+    border: 1px solid #ebebeb ;
+    text-align: center;
+    height: 28px;
+    margin: 0 5px;
+    
+}
+.thanhtiensphd{
+    width: 213px;
+    padding: 10px 0;
+    
+    font-size: 14px;
+    
+}
+.thanhtiensp{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 7;
+    color: #a74939;
+}
+.xoasphd{
+    width: 74px;
+    padding: 10px 0;
+    font-size: 14px;
+}
+.thanhtienttt{
+    font-size: 14px;
+    font-weight: 700;
+    color: #a74939; 
+    padding: 10px 15px;
+}
+.bang{
+    width: 100%;
+    border-left: solid 1px#cccccc;
+}
+.ngang{
+    width: 100%;
+    border-top: solid 1px#cccccc;
+    border-bottom: solid 1px#cccccc;
+}
+.ngang td{
+    border-right: solid 1px#cccccc;
+    text-align: center;
+}
+.ngang th{
+    border-right: solid 1px#cccccc;
+    text-align: center;
+}
+.tensphd{
+    width: 488px;
+    padding: 10px 0;
+    
+    font-size: 14px;
+}
+.trangthai {
+
+  }
+.trangthai div{
+    color: #686868;
+    margin: 0 5px;
+    margin: auto;
+}
+.dongiasphd{
+    width: 258px;
+    padding: 10px 0;
+    
+    font-size: 14px;
+}
+.dongiasp{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 7;
+    color: #a74939;
+}
+.sizedt{
+    width:10px;
+}
+.slsphd{
+    width: 213px;
+    padding: 10px 0;
+    font-size: 14px;
+
+}
+
+.sl{
+    display: flex;
+    justify-content: center;
+   
+}
+.thongso {
+   display: flex;
+   justify-content: center;
 }
