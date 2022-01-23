@@ -13,14 +13,14 @@ jwt.verify(token, 'process.env.LOGINJWT', function(err, data){
         //console.log("data: ",data)
     }
 }) */
- var a = {
+/*  var a = {
      a:1,
      b:2
 }
 console.log(a)
 a.c = 3
 a = a.c
-console.log(a)
+console.log(a) */
 
 /* console.log(process.env.DB_USERNAME, process.env.DB_PWD)
 console.log('Port sử dụng là ' + process.env.PORT) */
@@ -70,3 +70,23 @@ const key = crypto.pbkdf2Sync('456', salt, 2000, 64,'sha512')
 //console.log(salt)
 console.log('key chuẩn:'+ key.toString('hex')) */
 
+var faker = require('@faker-js/faker');
+
+// Initializing our variables with a different random data each time it is run
+var randomName = faker.name.findName(); // Generates a random name
+var randomEmail = faker.internet.email(); // Generates a random email
+var randomProduct = faker.commerce.productName(); // Generates a random product name
+var randomCompany = faker.company.companyName(); // Will give back a random company name
+var randomCard = faker.helpers.createCard(); // It's output is a random contact card containing many properties
+
+// Iteration
+// This code runs twenty times
+// It produces each time different data
+for (i = 0; i < 1; i++) {
+	console.log(randomName); // Outputs a random name
+	console.log(randomEmail); // Outputs a random email
+	console.log(randomProduct); // Outputs the random product name generated
+	console.log(randomCompany); // Produces a random company name
+	console.log(randomCard); // Gives back a random card
+	console.log("date:"+faker.date.past()); // Generates a random past date
+}
